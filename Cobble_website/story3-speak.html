@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="zh-Hant"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<title>說故事：大石頭先放 ｜ 漣語</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --cream:#F7F3EA; --cream-2:#F1EADC; --cream-deep:#EBE3D2; --card:#FFFDF8;
+    --pebble:#D4CFC4; --pebble-deep:#BBB4A4;
+    --lake:#6FA8DC; --lake-deep:#4E86BE; --lake-tint:rgba(111,168,220,0.14);
+    --ink:#3A352D; --ink-soft:#736C5F;
+    --maxw:1060px; --r:20px;
+    --shadow-soft:0 16px 44px -26px rgba(58,53,45,0.40);
+    --serif:"Noto Serif TC", serif; --sans:"Noto Sans TC", system-ui, sans-serif;
+    --display:"Fraunces","Noto Serif TC", serif;
+    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);font-size:18px;line-height:1.8;background:radial-gradient(120% 80% at 50% -10%, #FBF7EF 0%, var(--cream) 42%, var(--cream-2) 100%);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--grain);background-size:180px 180px;opacity:.05;mix-blend-mode:multiply;}
+  body > *{position:relative;z-index:1;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  a{color:inherit;text-decoration:none;}
+  .cobble-logo{display:block;height:auto;} .logo-missing{display:none;}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font-family:var(--sans);font-weight:500;font-size:1.05rem;padding:16px 34px;border-radius:999px;cursor:pointer;border:1.5px solid transparent;min-height:56px;transition:transform .25s ease, box-shadow .3s ease, background .25s ease, color .25s ease;}
+  .btn-primary{background:var(--lake);color:#fff;box-shadow:0 14px 30px -14px rgba(78,134,190,.7);}
+  .btn-primary:hover{background:var(--lake-deep);transform:translateY(-3px);}
+  .btn-ghost{background:#fff;color:var(--lake-deep);border-color:var(--lake);}
+  .btn-ghost:hover{background:var(--lake-tint);transform:translateY(-3px);}
+  .btn:focus-visible{outline:3px solid var(--lake-deep);outline-offset:3px;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 24px;max-width:var(--maxw);margin:0 auto;}
+  .topbar .brand{display:flex;align-items:center;gap:10px;}
+  .topbar .brand .cobble-logo{width:42px;}
+  .topbar .name{font-family:var(--serif);font-weight:600;letter-spacing:.14em;font-size:1.12rem;}
+  .back{display:inline-flex;align-items:center;gap:.4em;color:var(--lake-deep);font-weight:500;font-size:.98rem;padding:8px 4px;}
+  .back:hover{text-decoration:underline;}
+
+  .hero{text-align:center;padding:50px 24px 30px;overflow:hidden;}
+  .hero-inner{max-width:760px;margin:0 auto;}
+  .wordmark{font-family:var(--display);font-weight:500;line-height:1.05;letter-spacing:.01em;color:var(--ink);margin:8px 0 0;}
+  .sub-cn{font-family:var(--serif);font-weight:500;letter-spacing:.2em;margin:14px 0 0;color:var(--lake-deep);}
+  .track-tag{display:inline-flex;align-items:center;gap:.5em;background:var(--lake-tint);color:var(--lake-deep);font-weight:600;padding:8px 18px;border-radius:999px;font-size:1rem;}
+
+  .block{padding:8px 0 70px;}
+  .lead{text-align:center;color:var(--ink-soft);max-width:32em;margin:6px auto 0;line-height:1.95;font-family:var(--serif);}
+
+  .flow{max-width:680px;margin:30px auto 0;display:grid;gap:18px;}
+  .flow-stage{background:var(--card);border:1px solid var(--pebble);border-radius:var(--r);padding:26px 24px;box-shadow:var(--shadow-soft);text-align:center;transition:opacity .4s ease;}
+  .flow-stage.locked{opacity:.5;}
+  .flow-stage.locked .stage-body{display:none;}
+  .lock-note{display:none;color:var(--ink-soft);font-size:.96rem;margin:6px 0 0;}
+  .flow-stage.locked .lock-note{display:block;}
+  .stage-no{font-family:var(--display);font-style:italic;color:var(--lake-deep);font-size:.98rem;}
+  .stage-title{font-family:var(--serif);font-weight:600;font-size:1.28rem;letter-spacing:.04em;margin:4px 0 10px;}
+  .stage-text{color:var(--ink-soft);line-height:1.95;margin:0 0 18px;}
+  .stage-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+  .speed-toggle{display:inline-flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;justify-content:center;}
+  .speed-toggle button{padding:9px 20px;border-radius:999px;border:1.5px solid var(--pebble-deep);background:#fff;color:var(--ink);font-weight:500;cursor:pointer;min-height:44px;font-family:inherit;}
+  .speed-toggle button.active{background:var(--lake);color:#fff;border-color:var(--lake);}
+
+  .sent-list{display:grid;gap:12px;margin-top:14px;text-align:left;}
+  .sent-row{background:#fff;border:1px solid var(--pebble);border-radius:14px;padding:15px 16px;display:flex;gap:13px;align-items:center;justify-content:space-between;transition:border-color .25s ease, background .25s ease, transform .2s ease;}
+  .sent-row.playing{border-color:var(--lake);background:var(--lake-tint);transform:translateY(-2px);}
+  .sent-text{flex:1;min-width:0;}
+  .sent-text .en{font-family:var(--display);font-size:1.22rem;color:var(--ink);line-height:1.5;}
+  .sent-text .zh{color:var(--ink-soft);font-size:1rem;margin-top:3px;line-height:1.6;}
+  .play-en{display:inline-flex;align-items:center;gap:.3em;padding:8px 14px;border-radius:999px;border:1.5px solid var(--pebble-deep);background:#fff;color:var(--ink);font-size:.95rem;font-weight:500;cursor:pointer;white-space:nowrap;min-height:40px;font-family:inherit;transition:all .2s ease;flex:0 0 auto;}
+  .play-en:hover{border-color:var(--lake);color:var(--lake-deep);background:var(--lake-tint);}
+
+  .speak-list{display:grid;gap:16px;margin-top:14px;}
+  .speak-card{background:#fff;border:1px solid var(--pebble);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow-soft);text-align:left;}
+  .speak-card .en{font-family:var(--display);font-size:1.3rem;color:var(--ink);line-height:1.5;}
+  .speak-card .zh{color:var(--ink-soft);font-size:1.02rem;margin:4px 0 14px;}
+  .speak-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .mini{display:inline-flex;align-items:center;gap:.4em;padding:10px 18px;border-radius:999px;border:1.5px solid var(--pebble-deep);background:var(--cream-deep);color:var(--ink);font-weight:500;font-size:.98rem;cursor:pointer;min-height:44px;font-family:inherit;transition:all .2s ease;}
+  .mini:hover{border-color:var(--lake);color:var(--lake-deep);background:var(--lake-tint);}
+  .mini.is-done{background:var(--lake);color:#fff;border-color:var(--lake);}
+
+  .guess-grid{display:grid;gap:14px;margin-top:14px;}
+  .guess-card{border:1px solid var(--pebble);border-radius:16px;background:#fff;padding:20px 22px;text-align:left;box-shadow:var(--shadow-soft);}
+  .guess-c{font-family:var(--serif);color:var(--ink);font-size:1.18rem;line-height:1.7;margin-bottom:12px;}
+  .g3-btns{display:flex;gap:10px;flex-wrap:wrap;}
+  .g3-hint{display:none;font-family:var(--display);color:var(--ink-soft);margin-top:12px;font-size:1.2rem;letter-spacing:.06em;}
+  .guess-ans{display:none;margin-top:12px;color:var(--lake-deep);font-family:var(--display);font-size:1.35rem;line-height:1.5;}
+  .guess-card.show .guess-ans{display:block;}
+
+  /* 我的三顆大石頭 */
+  .frame-card{background:#fff;border:1px solid var(--pebble);border-radius:18px;padding:24px 22px;box-shadow:var(--shadow-soft);}
+  .frame-sent{font-family:var(--display);font-size:1.4rem;line-height:1.7;color:var(--ink);}
+  .myblank{display:inline-block;min-width:92px;border-bottom:2.5px solid var(--lake);color:var(--lake-deep);text-align:center;padding:0 8px;cursor:pointer;font-weight:600;}
+  .myblank.empty{color:var(--pebble-deep);font-weight:400;}
+  .sug-palette{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:18px;}
+  .sug-chip{padding:10px 15px;border-radius:14px;border:1.5px solid var(--pebble-deep);background:var(--cream-deep);font-family:var(--display);font-size:1.04rem;color:var(--ink);cursor:pointer;text-align:center;transition:all .18s;}
+  .sug-chip .zh{display:block;font-family:var(--serif);font-size:.8rem;color:var(--ink-soft);margin-top:1px;}
+  .sug-chip:hover{border-color:var(--lake);}
+  .my-done{display:none;margin-top:16px;color:var(--lake-deep);font-family:var(--serif);font-size:1.12rem;}
+
+  .ai-lock{display:flex;align-items:center;gap:14px;max-width:600px;margin:6px auto 0;background:linear-gradient(135deg,#EAF1F8,#DCE9F5);border:1px solid rgba(111,168,220,.4);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow-soft);}
+  .ai-ic{flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+  .ai-tx{flex:1;min-width:0;text-align:left;}
+  .ai-tt{font-family:var(--serif);font-weight:600;color:var(--lake-deep);font-size:1.05rem;}
+  .ai-dd{color:var(--ink-soft);font-size:.92rem;margin-top:2px;line-height:1.55;}
+  .ai-btn{flex:0 0 auto;background:var(--lake);color:#fff;border:none;border-radius:999px;padding:11px 22px;font-weight:600;cursor:pointer;min-height:46px;font-family:inherit;}
+  .ai-btn:hover{background:var(--lake-deep);}
+  @media(max-width:560px){.ai-lock{flex-direction:column;text-align:center;}.ai-tx{text-align:center;}}
+
+  .finish-wrap{text-align:center;margin-top:26px;}
+  .counter{font-family:var(--serif);font-size:1.3rem;color:var(--lake-deep);margin:0 0 16px;}
+  .counter span{font-family:var(--display);font-weight:600;font-size:1.5rem;}
+  .reward-stars{font-size:2.2rem;letter-spacing:.3em;margin-bottom:4px;animation:pop .6s ease;}
+  @keyframes pop{0%{transform:scale(.3);opacity:0;}60%{transform:scale(1.15);}100%{transform:scale(1);opacity:1;}}
+  .finish-msg{display:none;max-width:560px;margin:18px auto 0;background:var(--lake-tint);border:1px solid rgba(111,168,220,.4);border-radius:var(--r);padding:26px;color:var(--lake-deep);font-family:var(--serif);font-size:1.18rem;line-height:1.9;}
+
+  .collect-card{width:300px;max-width:86%;height:430px;margin:18px auto 6px;perspective:1200px;cursor:pointer;}
+  .cc-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;}
+  .collect-card.flipped .cc-inner{transform:rotateY(180deg);}
+  .cc-face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;box-shadow:0 22px 50px -24px rgba(78,134,190,.5);border:1px solid rgba(111,168,220,.35);overflow:hidden;}
+  .cc-front{background:linear-gradient(160deg,#FBF8F1,#E8F0F8);}
+  .cc-back{background:linear-gradient(160deg,#EAF1F8,#F3ECDE);transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center;}
+  .cc-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-style:italic;color:var(--lake-deep);font-size:.92rem;letter-spacing:.04em;}
+  .cc-no{font-weight:600;font-style:normal;}
+  .cc-en{font-family:var(--display);font-size:1.5rem;color:var(--ink);line-height:1.45;margin:auto 0 10px;text-align:left;}
+  .cc-zh{color:var(--ink-soft);font-size:1.05rem;text-align:left;}
+  .cc-foot{margin-top:16px;padding-top:14px;border-top:1px dashed var(--pebble-deep);display:flex;justify-content:space-between;align-items:center;color:var(--ink-soft);font-size:.85rem;}
+  .cc-emblem{width:30px;height:22px;border-radius:60% 40% 56% 44%/58% 56% 44% 42%;background:radial-gradient(120% 120% at 32% 26%,#fff,#cfc8ba 60%,#a59c8d);}
+  .cc-back .bk-title{font-family:var(--serif);font-weight:600;font-size:1.4rem;color:var(--ink);}
+  .cc-back .bk-en{font-family:var(--display);font-style:italic;color:var(--ink-soft);margin-top:2px;}
+  .cc-back .bk-meaning{font-family:var(--serif);color:var(--lake-deep);font-size:1.2rem;line-height:1.8;margin:10px 0;}
+  .bk-sign{width:100%;margin:12px 0 2px;display:flex;flex-direction:column;gap:9px;}
+  .sign-row{display:flex;align-items:flex-end;justify-content:center;gap:10px;}
+  .sign-label{font-family:var(--serif);font-size:.9rem;color:var(--ink-soft);white-space:nowrap;}
+  .sign-date{font-family:var(--display);font-size:1.05rem;color:var(--lake-deep);letter-spacing:.06em;}
+  .sign-line{min-width:150px;border-bottom:1.5px solid var(--pebble-deep);font-family:var(--display);font-style:italic;font-size:1.18rem;color:var(--ink);min-height:1.7em;line-height:1.7em;outline:none;text-align:center;padding:0 8px;}
+  .sign-line:empty:before{content:attr(data-ph);color:var(--pebble-deep);font-style:normal;font-size:.92rem;}
+  .sign-line:focus{border-bottom-color:var(--lake);}
+  .cc-back .bk-mark{font-family:var(--display);color:var(--ink-soft);font-size:.95rem;}
+  .flip-hint{color:var(--ink-soft);font-size:.88rem;} .cc-back .flip-hint{margin-top:10px;}
+  .confetti-pc{position:fixed;top:-12px;width:9px;height:14px;border-radius:2px;z-index:9999;pointer-events:none;}
+
+  footer{text-align:center;padding:54px 24px 48px;background:linear-gradient(180deg,#ECE3D1 0%, #E4D9C3 70%, #DCCFB4 100%);border-top:1px solid rgba(187,180,164,.5);}
+  footer .cobble-logo{width:min(180px,52vw);margin:0 auto 6px;}
+  .foot-mark{font-family:var(--display);font-weight:500;font-size:1.7rem;letter-spacing:.02em;color:var(--ink);}
+  .foot-cn{font-family:var(--serif);letter-spacing:.3em;font-size:1rem;margin-top:2px;color:var(--ink-soft);}
+  .foot-tag{font-family:var(--display);font-style:italic;color:var(--lake-deep);margin-top:12px;font-size:1rem;letter-spacing:.04em;}
+
+  @media (max-width:720px){ body{font-size:17px;} .hero{padding:40px 20px 24px;} .sent-row{flex-wrap:wrap;} }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style></head><body>
+
+<nav class="topbar">
+  <a class="back" href="story3-listen.html">← 回 聽</a>
+  <div class="brand"><img class="cobble-logo" src="logo.png" alt="" onerror="this.classList.add('logo-missing')"/><span class="name">漣語</span></div>
+</nav>
+
+<header class="hero"><div class="hero-inner">
+  <span class="track-tag">🗣️ 說說看</span>
+  <h1 class="wordmark" style="font-size:clamp(2.1rem,6.2vw,3.2rem);">大石頭先放</h1>
+  <p class="sub-cn" style="font-size:1.05rem;letter-spacing:.1em;">Big Stones First</p>
+</div></header>
+
+<section class="block"><div class="wrap">
+  <p class="lead">聽過了，換你開口。<br/>最後我們會聊到——你自己生活裡的大石頭，是什麼？</p>
+
+  <div class="flow">
+
+    <!-- 1 跟說 -->
+    <div class="flow-stage" id="stage1">
+      <div class="stage-no">第 1 段</div>
+      <div class="stage-title">① 一句一句跟說</div>
+      <div class="stage-body">
+        <p class="stage-text">點 🔊 聽一句，跟著輕輕說一次。會了就打勾。</p>
+        <div class="speak-list" id="list1"></div>
+        <div class="stage-btns" style="margin-top:22px;"><button class="btn btn-primary" data-next="stage2">都跟說過了 →</button></div>
+      </div>
+    </div>
+
+    <!-- 2 看中文說英文 -->
+    <div class="flow-stage locked" id="stage2">
+      <div class="stage-no">第 2 段</div>
+      <div class="stage-title">② 看中文，說英文</div>
+      <p class="lock-note">完成上一段後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">只看中文，先自己說出英文。卡住了可以「看首字」或直接「聽答案」。</p>
+        <div class="guess-grid" id="list2"></div>
+        <div class="stage-btns" style="margin-top:22px;"><button class="btn btn-primary" data-next="stage3">說過一輪了 →</button></div>
+      </div>
+    </div>
+
+    <!-- 3 角色扮演 -->
+    <div class="flow-stage locked" id="stage3">
+      <div class="stage-no">第 3 段</div>
+      <div class="stage-title">③ 角色扮演</div>
+      <p class="lock-note">完成上一段後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">選一個角色，輪到你就開口；對方的話按 🔊 讓語音念。換邊再玩一次。</p>
+        <div class="speed-toggle" id="roleToggle">
+          <button data-role="grandpa" class="active">我演 爺爺</button>
+          <button data-role="lin">我演 小林</button>
+        </div>
+        <div class="sent-list" id="list3"></div>
+        <div class="stage-btns" style="margin-top:22px;"><button class="btn btn-primary" data-next="stage4">兩個角色都說過了 →</button></div>
+      </div>
+    </div>
+
+    <!-- 4 我的三顆大石頭 -->
+    <div class="flow-stage locked" id="stage4">
+      <div class="stage-no">第 4 段</div>
+      <div class="stage-title">④ 我的三顆大石頭</div>
+      <p class="lock-note">完成上一段後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">現在輪到你的故事了。你生活裡最重要的三件事，是什麼？<br/>點下面的詞填進去，或自己想三個，照句子說出來。</p>
+        <div class="frame-card">
+          <div class="frame-sent">My big stones are
+            <span class="myblank empty" id="b0" data-i="0">＿＿</span>,
+            <span class="myblank empty" id="b1" data-i="1">＿＿</span>, and
+            <span class="myblank empty" id="b2" data-i="2">＿＿</span>.
+          </div>
+          <div class="sug-palette" id="sugPalette"></div>
+          <div class="stage-btns" style="margin-top:18px;">
+            <button class="btn btn-ghost" id="sayMine">🔊 聽我的整句</button>
+            <button class="btn btn-ghost" id="clearMine">清空重填</button>
+          </div>
+          <div class="my-done" id="myDone">✓ 這就是你的三顆大石頭。記得，先放它們。</div>
+        </div>
+        <div class="stage-btns" style="margin-top:22px;"><button class="btn btn-primary" data-next="stage5">說好了 →</button></div>
+      </div>
+    </div>
+
+    <!-- 5 自己說整篇 -->
+    <div class="flow-stage locked" id="stage5">
+      <div class="stage-no">第 5 段</div>
+      <div class="stage-title">⑤ 自己說一遍</div>
+      <p class="lock-note">完成上一段後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">只看中文提示，把整篇用英文說一遍。卡住了再按「聽一句」。<br/>想說幾次都可以，次數會幫你記著。</p>
+        <div class="sent-list" id="list5"></div>
+        <div class="finish-wrap">
+          <div class="counter" id="sayCounter" style="display:none;">你已經說了 <span id="sayCount">0</span> 次 🌱</div>
+          <button class="btn btn-primary" data-finish>我說完了 ✦</button>
+        </div>
+        <div class="stage-btns" style="margin-top:20px;"><button class="btn btn-primary" data-next="stage6">下一段 →</button></div>
+      </div>
+    </div>
+
+    <!-- 6 AI -->
+    <div class="flow-stage locked" id="stage6">
+      <div class="stage-no">第 6 段</div>
+      <div class="stage-title">⑥ 與 AI 好友聊聊</div>
+      <p class="lock-note">完成上一段後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">想找人練習說這個故事，或聊聊你的大石頭嗎？</p>
+        <div class="ai-lock">
+          <div class="ai-ic" aria-hidden="true">🤖</div>
+          <div class="ai-tx">
+            <div class="ai-tt">想跟 AI 好友練習說說看嗎？</div>
+            <div class="ai-dd">用一句最簡單的話就好，說說你的大石頭。他有耐性，會等你，也不會笑你。</div>
+          </div>
+          <button type="button" class="ai-btn" data-chat>開始聊聊</button>
+        </div>
+        <div class="stage-btns" style="margin-top:20px;"><button class="btn btn-primary" data-next="stage7">領卡 →</button></div>
+      </div>
+    </div>
+
+    <!-- 7 領卡 -->
+    <div class="flow-stage locked" id="stage7">
+      <div class="stage-no">第 7 段</div>
+      <div class="stage-title">⑦ 領漣語卡</div>
+      <p class="lock-note">完成上一段後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">說完一整篇，這張漣語卡是你的。</p>
+        <button class="btn btn-primary" id="getCard">✦ 領取漣語卡</button>
+        <div class="finish-msg" id="finishMsg">
+          <div class="reward-stars" aria-hidden="true">⭐ ⭐</div>
+          No.03 入手 🌊
+          <div class="collect-card" id="rewardCard"><div class="cc-inner">
+            <div class="cc-face cc-front">
+              <div class="cc-top"><span>漣語卡 · Ripple Card</span><span class="cc-no">No.03</span></div>
+              <div class="cc-en">Put the big stones first.</div>
+              <div class="cc-zh">先放大石頭。</div>
+              <div class="cc-foot"><span>大石頭先放</span><span class="cc-emblem" aria-hidden="true"></span></div>
+            </div>
+            <div class="cc-face cc-back">
+              <div class="bk-title">大石頭先放</div>
+              <div class="bk-en">Big Stones First</div>
+              <div class="bk-meaning">重要的事，<br/>先做。</div>
+              <div class="bk-sign">
+                <div class="sign-row"><span class="sign-label">領取日</span><span class="sign-date" id="cardDate">—</span></div>
+                <div class="sign-row"><span class="sign-label">簽名</span><span class="sign-line" id="cardSign" contenteditable="true" data-ph="簽上你的名字"></span></div>
+              </div>
+              <div class="bk-mark">Cobble 漣心</div>
+              <div class="flip-hint">點一下翻回正面</div>
+            </div>
+          </div></div>
+          <p class="flip-hint" style="text-align:center;margin-top:6px;">✦ 點卡片可翻面 ✦</p>
+          <div style="font-family:var(--display);font-style:italic;color:var(--lake-deep);line-height:1.75;font-size:1.12rem;margin-top:16px;text-align:center;">🌱 One story.<br/>One ripple.<br/>One step forward.</div>
+          <div class="stage-btns" style="margin-top:18px;"><a href="story3-read.html" class="btn btn-primary">下一步：讀故事 →</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div></section>
+
+<footer>
+  <img class="cobble-logo" src="logo.png" alt="" onerror="this.classList.add('logo-missing')"/>
+  <div class="foot-mark">漣語</div>
+  <div class="foot-cn">Cobble 漣心</div>
+  <div class="foot-tag">Small. Smooth. Powerful.</div>
+</footer>
+
+<script>
+var LINES=[
+["Grandpa puts a big glass jar on the table.","爺爺把一個大玻璃罐放在桌上。"],
+["“Watch this,” he says.","「看著喔，」他說。"],
+["He puts in some big stones.","他放進幾顆大石頭。"],
+["“Is the jar full?” he asks.","「罐子滿了嗎？」他問。"],
+["“Yes, it is full,” says Lin.","「滿了，」小林說。"],
+["Grandpa smiles.","爺爺微笑著。"],
+["He adds some small stones.","他又加了一些小石子。"],
+["The small stones fall between the big ones.","小石子掉進大石頭的縫裡。"],
+["“Is it full now?” he asks.","「現在滿了嗎？」他問。"],
+["“Maybe not,” says Lin.","「好像還沒，」小林說。"],
+["Grandpa pours in soft sand.","爺爺倒進細細的沙。"],
+["The sand fills every small space.","沙填滿了每一個小縫。"],
+["“Now the jar is full,” he says.","「現在罐子滿了，」他說。"],
+["“What does this mean?” asks Lin.","「這是什麼意思？」小林問。"],
+["“The jar is like one day,” says Grandpa.","「罐子就像一天，」爺爺說。"],
+["“The big stones are the important things.”","「大石頭是重要的事。」"],
+["“Family, health, and a kind heart.”","「家人、健康，還有一顆善良的心。」"],
+["“The sand is the small things.”","「沙是那些小事。」"],
+["“If you put the sand in first,” he says,","「如果你先放沙，」他說，"],
+["“there is no room for the big stones.”","「就沒有空間放大石頭了。」"],
+["Lin thinks for a while.","小林想了一會兒。"],
+["“So I put the big stones first,” says Lin.","「所以我要先放大石頭，」小林說。"],
+["“Yes. Always first,” says Grandpa.","「對，永遠先放，」爺爺說。"],
+["Lin looks at the jar and smiles.","小林看著罐子，笑了。"]
+];
+var G2=[2,3,5,6,10,11,14,15,16,22];  // ② 看中文說英文，挑短句
+var SCRIPT=[
+["narr","Grandpa puts a big glass jar on the table.","爺爺把一個大玻璃罐放在桌上。"],
+["grandpa","“Watch this.”","「看著喔。」"],
+["narr","He puts in some big stones.","他放進幾顆大石頭。"],
+["grandpa","“Is the jar full?”","「罐子滿了嗎？」"],
+["lin","“Yes, it is full.”","「滿了。」"],
+["narr","He adds some small stones, then soft sand.","他加了小石子，再倒進細沙。"],
+["grandpa","“Now the jar is full.”","「現在罐子滿了。」"],
+["lin","“What does this mean?”","「這是什麼意思？」"],
+["grandpa","“The jar is like one day.”","「罐子就像一天。」"],
+["grandpa","“The big stones are the important things.”","「大石頭是重要的事。」"],
+["grandpa","“Family, health, and a kind heart.”","「家人、健康，還有一顆善良的心。」"],
+["lin","“So I put the big stones first.”","「所以我要先放大石頭。」"],
+["grandpa","“Yes. Always first.”","「對，永遠先放。」"]
+];
+var SUGG=[
+ ["Family","家人"],["My health","健康"],["A kind heart","善良的心"],
+ ["My friends","朋友"],["My grandchildren","孫子"],["Reading","讀書"],
+ ["My garden","種花"],["Gratitude","感恩"],["Peace of mind","心安"],
+ ["Walking","散步"],["Tea with friends","和朋友喝茶"],["My family’s health","家人的健康"]
+];
+
+/* TTS */
+var RATE=0.86,_CV=[];
+function _loadV(){try{_CV=window.speechSynthesis.getVoices()||[];}catch(e){_CV=[];}}
+if('speechSynthesis' in window){_loadV();window.speechSynthesis.onvoiceschanged=_loadV;}
+function _pickV(lang){if(!_CV.length)_loadV();var p=lang.toLowerCase().slice(0,2);var m=_CV.filter(function(v){return v.lang&&v.lang.toLowerCase().indexOf(p)===0;});return m[0]||null;}
+function clean(t){return t.replace(/[“”]/g,'');}
+function speak(t,lang,rt){if(!('speechSynthesis' in window)){alert('這個瀏覽器不支援朗讀，請改用 Chrome 或 Safari 開啟 🌊');return;}try{window.speechSynthesis.cancel();}catch(e){}var u=new SpeechSynthesisUtterance(clean(t));u.lang=lang;u.rate=rt||RATE;var v=_pickV(lang);if(v)u.voice=v;try{window.speechSynthesis.resume();}catch(e){}window.speechSynthesis.speak(u);}
+function esc(s){return s.replace(/"/g,'&quot;');}
+function maskEN(s){return s.replace(/[A-Za-z]+/g,function(w){return w[0]+'_'.repeat(Math.max(0,w.length-1));});}
+function roleName(r){return r==='grandpa'?'爺爺':'小林';}
+
+function confetti(){if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var cs=['#6FA8DC','#E7C9A0','#D6A45F','#B5707A','#6E8157','#EDE9E0'];for(var k=0;k<38;k++){var p=document.createElement('div');p.className='confetti-pc';p.style.left=(Math.random()*100)+'vw';p.style.background=cs[Math.floor(Math.random()*cs.length)];var dur=2400+Math.random()*1500,delay=Math.random()*500,x=(Math.random()*2-1)*120,rot=Math.random()*720;document.body.appendChild(p);if(p.animate){p.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+x+'px,100vh) rotate('+rot+'deg)',opacity:.9}],{duration:dur,delay:delay});}setTimeout((function(el){return function(){el.remove();};})(p),dur+delay+300);}}
+
+/* 1 跟說 */
+(function(){var b=document.getElementById('list1');LINES.forEach(function(L){var d=document.createElement('div');d.className='speak-card';d.innerHTML='<div class="en">'+L[0]+'</div><div class="zh">'+L[1]+'</div><div class="speak-row"><button class="play-en" data-en="'+esc(L[0])+'">🔊 聽一次</button><button class="mini" data-done>我會了 ✓</button></div>';b.appendChild(d);});})();
+/* 2 看中文說英文 */
+(function(){var b=document.getElementById('list2');G2.forEach(function(i){var L=LINES[i];var d=document.createElement('div');d.className='guess-card';d.innerHTML='<div class="guess-c">'+L[1]+'</div><div class="g3-btns"><button class="mini" data-hint>看首字提示</button><button class="mini guess-show" data-en="'+esc(L[0])+'">聽英文對答案 🔊</button></div><div class="g3-hint">'+maskEN(clean(L[0]))+'</div><div class="guess-ans">'+L[0]+'</div>';b.appendChild(d);});})();
+/* 3 角色扮演 */
+function renderRole(role){var b=document.getElementById('list3');b.innerHTML='';SCRIPT.forEach(function(it){var who=it[0],en=it[1],zh=it[2];var d=document.createElement('div');if(who==='narr'){d.className='sent-row';d.style.background='var(--cream-deep)';d.innerHTML='<div class="sent-text"><div class="zh">（旁白）'+zh+'</div></div><button class="play-en" data-en="'+esc(en)+'">🔊</button>';}else if(who===role){d.className='sent-row playing';d.innerHTML='<div class="sent-text"><div class="en" style="color:var(--lake-deep);font-weight:600;">（換你說）'+roleName(who)+'</div><div class="zh">'+zh+'</div></div><button class="play-en" data-en="'+esc(en)+'">卡住了聽一次</button>';}else{d.className='sent-row';d.innerHTML='<div class="sent-text"><div class="en">'+roleName(who)+'：'+en+'</div><div class="zh">'+zh+'</div></div><button class="play-en" data-en="'+esc(en)+'">🔊</button>';}b.appendChild(d);});}
+renderRole('grandpa');
+document.getElementById('roleToggle').addEventListener('click',function(e){var btn=e.target.closest('button[data-role]');if(!btn)return;this.querySelectorAll('button').forEach(function(x){x.classList.remove('active');});btn.classList.add('active');renderRole(btn.getAttribute('data-role'));});
+/* 4 我的三顆大石頭 */
+(function(){
+  var pal=document.getElementById('sugPalette');var blanks=[document.getElementById('b0'),document.getElementById('b1'),document.getElementById('b2')];
+  SUGG.forEach(function(s){var c=document.createElement('div');c.className='sug-chip';c.setAttribute('data-en',s[0]);c.innerHTML=s[0]+'<span class="zh">'+s[1]+'</span>';pal.appendChild(c);});
+  function check(){var all=blanks.every(function(b){return !b.classList.contains('empty');});if(all){document.getElementById('myDone').style.display='block';}}
+  pal.addEventListener('click',function(e){var c=e.target.closest('.sug-chip');if(!c)return;var en=c.getAttribute('data-en');speak(en,'en-US');var slot=blanks.find(function(b){return b.classList.contains('empty');});if(slot){slot.textContent=en;slot.classList.remove('empty');check();}});
+  blanks.forEach(function(b){b.addEventListener('click',function(){b.textContent='＿＿';b.classList.add('empty');document.getElementById('myDone').style.display='none';});});
+  document.getElementById('sayMine').addEventListener('click',function(){var vals=blanks.filter(function(b){return !b.classList.contains('empty');}).map(function(b){return b.textContent;});if(!vals.length){speak('My big stones are...','en-US');return;}var s='My big stones are '+(vals.length===1?vals[0]:vals.slice(0,-1).join(', ')+', and '+vals[vals.length-1])+'.';speak(s,'en-US');});
+  document.getElementById('clearMine').addEventListener('click',function(){blanks.forEach(function(b){b.textContent='＿＿';b.classList.add('empty');});document.getElementById('myDone').style.display='none';});
+})();
+/* 5 自己說整篇 */
+(function(){var b=document.getElementById('list5');LINES.forEach(function(L){var d=document.createElement('div');d.className='sent-row';d.innerHTML='<div class="sent-text"><div class="zh" style="font-size:1.1rem;color:var(--ink);">'+L[1]+'</div></div><button class="play-en" data-en="'+esc(L[0])+'">▶ 聽一句</button>';b.appendChild(d);});})();
+var sayN=0;
+document.querySelector('[data-finish]').addEventListener('click',function(){sayN++;var c=document.getElementById('sayCounter');document.getElementById('sayCount').textContent=sayN;c.style.display='block';if(sayN===1)confetti();});
+
+/* 共用：🔊 / 我會了 / 首字 / 聽答案 */
+document.addEventListener('click',function(e){var pe=e.target.closest('.play-en');if(pe){speak(pe.getAttribute('data-en'),'en-US');var r=pe.closest('.sent-row');if(r){r.classList.add('playing');setTimeout(function(){r.classList.remove('playing');},1200);}}});
+document.getElementById('list1').addEventListener('click',function(e){var b=e.target.closest('[data-done]');if(!b)return;b.classList.toggle('is-done');b.textContent=b.classList.contains('is-done')?'已記住 ✓':'我會了 ✓';});
+document.getElementById('list2').addEventListener('click',function(e){var h=e.target.closest('[data-hint]');if(h){h.closest('.guess-card').querySelector('.g3-hint').style.display='block';return;}var s=e.target.closest('.guess-show');if(s){s.closest('.guess-card').classList.add('show');speak(s.getAttribute('data-en'),'en-US',0.82);}});
+/* AI */
+document.querySelectorAll('[data-chat]').forEach(function(b){b.addEventListener('click',function(){alert('AI 好友即將開放，敬請期待 🤖🌊');});});
+/* 解鎖 */
+document.querySelectorAll('[data-next]').forEach(function(btn){btn.addEventListener('click',function(){var nx=document.getElementById(btn.getAttribute('data-next'));if(nx){nx.classList.remove('locked');try{nx.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}}});});
+/* 領卡 */
+document.getElementById('getCard').addEventListener('click',function(){var m=document.getElementById('finishMsg');m.style.display='block';this.style.display='none';var d=new Date();document.getElementById('cardDate').textContent=d.getFullYear()+'.'+('0'+(d.getMonth()+1)).slice(-2)+'.'+('0'+d.getDate()).slice(-2);try{m.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}confetti();});
+document.getElementById('rewardCard').addEventListener('click',function(){this.classList.toggle('flipped');});
+(function(){var sg=document.getElementById('cardSign');if(sg){['click','mousedown','touchstart','keydown','keyup'].forEach(function(ev){sg.addEventListener(ev,function(e){e.stopPropagation();});});}})();
+</script>
+</body></html>

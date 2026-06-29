@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh-Hant"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Cache-Control" content="no-cache"/><title>聽故事：照片老了，我們依然 ｜ 漣語</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--cream:#F7F3EA;--cream-2:#F1EADC;--cream-deep:#EBE3D2;--card:#FFFDF8;--pebble:#D4CFC4;--pebble-deep:#BBB4A4;--lake:#6FA8DC;--lake-deep:#4E86BE;--lake-tint:rgba(111,168,220,.16);--ink:#3A352D;--ink-soft:#736C5F;--r:20px;--shadow-soft:0 16px 44px -26px rgba(58,53,45,.4);--serif:"Noto Serif TC",serif;--sans:"Noto Sans TC",system-ui,sans-serif;--display:"Fraunces","Noto Serif TC",serif;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:var(--sans);color:var(--ink);font-size:18px;line-height:1.8;background:radial-gradient(120% 80% at 50% -10%,#FBF7EF 0%,var(--cream) 42%,var(--cream-2) 100%);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;max-width:1060px;margin:0 auto;}
+.back{font-family:var(--serif);color:var(--lake-deep);text-decoration:none;}
+.brand{display:flex;align-items:center;gap:8px;}.brand img{height:30px;}.brand .name{font-family:var(--display);font-style:italic;}
+.wrap{max-width:660px;margin:0 auto;padding:8px 22px 70px;}
+.hero{text-align:center;padding:14px 0 4px;}
+.eyebrow{letter-spacing:.34em;text-transform:uppercase;color:var(--lake-deep);font-size:.72rem;margin:0 0 10px;}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,5.6vw,2.5rem);margin:.1em 0;}
+.sub-cn{font-family:var(--serif);color:var(--ink-soft);letter-spacing:.16em;margin:.2em 0 0;}
+.intro{font-family:var(--serif);color:var(--ink);font-size:1.05rem;line-height:1.9;text-align:center;max-width:30em;margin:14px auto 0;}
+.intro .soft{color:var(--ink-soft);}
+.divider{width:54px;height:1px;background:var(--pebble-deep);border:0;margin:20px auto;}
+.stage{background:var(--card);border:1px solid var(--pebble);border-radius:var(--r);box-shadow:var(--shadow-soft);padding:22px 20px;margin:16px 0;transition:opacity .4s,filter .4s;}
+.stage.locked{opacity:.5;filter:grayscale(.45);}
+.stage.locked .body{display:none;}
+.stage.locked .lockmsg{display:block;}
+.lockmsg{display:none;font-family:var(--serif);color:var(--ink-soft);font-size:.95rem;margin-top:6px;}
+.stage-no{font-family:var(--sans);letter-spacing:.2em;font-size:.7rem;color:var(--lake-deep);text-transform:uppercase;}
+.stage-title{font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--ink);margin:4px 0 6px;}
+.hint{font-family:var(--serif);color:var(--ink-soft);font-size:1rem;margin:0 0 14px;}
+.speed{display:inline-flex;border:1px solid var(--pebble-deep);border-radius:999px;overflow:hidden;margin-bottom:14px;}
+.speed button{border:0;background:none;font-family:var(--serif);padding:7px 16px;font-size:.92rem;color:var(--ink-soft);cursor:pointer;}
+.speed button.active{background:var(--lake-tint);color:var(--lake-deep);}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--serif);text-decoration:none;border-radius:999px;padding:11px 20px;font-size:1rem;cursor:pointer;border:0;}
+.btn-ghost{color:var(--lake-deep);border:1px solid var(--pebble-deep);background:none;}
+.btn-primary{color:#fff;background:linear-gradient(160deg,var(--lake),var(--lake-deep));}
+.btn-next{margin-top:14px;}
+.nowline{font-family:var(--display);color:var(--ink);font-size:1.12rem;margin:14px 0 0;min-height:1.5em;text-align:center;}
+textarea{width:100%;min-height:90px;border:1px solid var(--pebble-deep);border-radius:12px;padding:12px;font-family:var(--serif);font-size:1rem;color:var(--ink);background:#fff;resize:vertical;}
+.sent{display:flex;align-items:flex-start;gap:10px;padding:12px 4px;border-bottom:1px solid rgba(212,207,196,.5);}
+.sent .say{flex-shrink:0;cursor:pointer;border:0;background:var(--lake-tint);color:var(--lake-deep);border-radius:50%;width:32px;height:32px;font-size:.95rem;}
+.sent .en{font-family:var(--display);font-size:1.1rem;}
+.sent .zh{font-family:var(--serif);color:var(--ink-soft);font-size:.96rem;margin-top:3px;}
+.q{padding:12px 0;border-bottom:1px solid rgba(212,207,196,.5);}
+.q .qt{font-family:var(--serif);font-size:1.06rem;color:var(--ink);}
+.q .qbtns{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;}
+.q .mini{font-family:var(--serif);font-size:.85rem;color:var(--lake-deep);background:var(--lake-tint);border:0;border-radius:999px;padding:6px 14px;cursor:pointer;}
+.q .ans{font-family:var(--serif);color:var(--ink-soft);margin-top:8px;display:none;}
+.q .ans.show{display:block;}
+.ly-card{max-width:360px;margin:8px auto 0;background:linear-gradient(160deg,#FFFDF8,#F1EADC);border:1px solid var(--pebble);border-radius:18px;padding:24px 22px;text-align:center;box-shadow:var(--shadow-soft);}
+.ly-card .cap{font-family:var(--serif);letter-spacing:.2em;font-size:.72rem;color:var(--lake-deep);text-transform:uppercase;}
+.ly-card .line{font-family:var(--display);font-size:1.15rem;color:var(--ink);line-height:1.6;margin:12px 0;}
+.ly-card .zh{font-family:var(--serif);color:var(--ink-soft);font-size:.96rem;}
+.ly-card .date{font-family:var(--serif);color:var(--pebble-deep);font-size:.8rem;margin-top:14px;}
+.foot-btns{text-align:center;margin-top:24px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+footer{text-align:center;color:var(--ink-soft);font-family:var(--serif);font-size:.85rem;padding:26px 0 0;}
+.center{text-align:center;}
+</style></head><body>
+<nav class="topbar"><a class="back" href="lianyu.html">← 回 漣語</a><div class="brand"><img src="logo.png" alt="" onerror="this.style.display='none'"/><span class="name">漣語</span></div></nav>
+<div class="wrap">
+<header class="hero"><p class="eyebrow">Story Two · Listen</p><h1>照片老了，我們依然</h1><p class="sub-cn">The Old Photo</p></header>
+<p class="intro">聽，是最自然的開始。<br/><span class="soft">不用先看字、先背單字——放輕鬆，讓耳朵先跟這個故事做朋友。</span></p>
+<hr class="divider"/>
+
+<div class="stage" id="s1">
+  <div class="stage-no">第 1 關</div><div class="stage-title">① 聽一整個故事</div>
+  <div class="body">
+    <p class="hint">先別急著聽懂，讓聲音像一首歌一樣流過去。</p>
+    <div class="speed"><button data-rate="1" class="active">正常速</button><button data-rate="0.6">慢速</button></div>
+    <div class="btns"><button class="btn btn-primary" id="playEN1">▶ 聽英文整篇</button><button class="btn btn-ghost" id="playZH1">▶ 聽中文語意</button><button class="btn btn-ghost" id="stop1">■ 停</button></div>
+    <p class="nowline" id="now1"></p>
+    <div class="center"><button class="btn btn-ghost btn-next" id="u2">我聽過了，下一關 →</button></div>
+  </div>
+</div>
+
+<div class="stage locked" id="s2">
+  <div class="stage-no">第 2 關</div><div class="stage-title">② 你聽懂了哪幾句？寫下來</div>
+  <p class="lockmsg">完成上一關後開啟 🌊</p>
+  <div class="body">
+    <p class="hint">一個字、一個畫面、一種感覺，都很好。寫下來，你會發現你懂的比想像多。</p>
+    <textarea id="note2" placeholder="我聽到的，可能是……"></textarea>
+    <div class="center"><button class="btn btn-primary btn-next" id="u3">我寫好了 ✓</button></div>
+  </div>
+</div>
+
+<div class="stage locked" id="s3">
+  <div class="stage-no">第 3 關</div><div class="stage-title">③ 一句一句，慢慢聽</div>
+  <p class="lockmsg">完成上一關後開啟 🌊</p>
+  <div class="body">
+    <p class="hint">點每句旁邊的 🔊，慢慢聽、慢慢感受。</p>
+    <div id="sentList"></div>
+    <div class="center"><button class="btn btn-ghost btn-next" id="u4">都聽過了 →</button></div>
+  </div>
+</div>
+
+<div class="stage locked" id="s4">
+  <div class="stage-no">第 4 關</div><div class="stage-title">④ 整篇，再聽一次</div>
+  <p class="lockmsg">完成上一關後開啟 🌊</p>
+  <div class="body">
+    <p class="hint">這一次，試著跟著心裡默念。</p>
+    <div class="btns"><button class="btn btn-primary" id="playEN4">▶ 再聽英文整篇</button><button class="btn btn-ghost" id="stop4">■ 停</button></div>
+    <p class="nowline" id="now4"></p>
+    <div class="center"><button class="btn btn-ghost btn-next" id="u5">再聽完了 →</button></div>
+  </div>
+</div>
+
+<div class="stage locked" id="s5">
+  <div class="stage-no">第 5 關</div><div class="stage-title">⑤ 試著回答 5 個小問題</div>
+  <p class="lockmsg">完成上一關後開啟 🌊</p>
+  <div class="body">
+    <p class="hint">不是考試，是陪你回想故事。想不出來，再聽一次也沒關係。</p>
+    <div id="quesList"></div>
+    <div class="center"><button class="btn btn-primary btn-next" id="u6">我想過了 →</button></div>
+  </div>
+</div>
+
+<div class="stage locked" id="s6">
+  <div class="stage-no">第 6 關</div><div class="stage-title">⑥ 完成・領取漣語卡</div>
+  <p class="lockmsg">完成上一關後開啟 🌊</p>
+  <div class="body">
+    <p class="hint center">⭐ 你聽完了一整個故事，真的很棒。這份禮物，送給你。</p>
+    <div class="center"><button class="btn btn-primary" id="getCard">領取漣語卡 🌟</button></div>
+    <div id="cardBox" style="display:none;">
+      <div class="ly-card">
+        <div class="cap">Ripple Card · 漣語卡</div>
+        <div class="line">The photo is old,<br/>but their love is still warm.</div>
+        <div class="zh">照片老了，<br/>但他們的愛，依然溫暖。</div>
+        <div class="date" id="cardDate"></div>
+      </div>
+      <div class="center"><button class="btn btn-ghost btn-next" id="u7">收下了，下一關 →</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="stage locked" id="s7">
+  <div class="stage-no">第 7 關</div><div class="stage-title">⑦ 想再多聊聊這個故事嗎？</div>
+  <p class="lockmsg">完成上一關後開啟 🌊</p>
+  <div class="body">
+    <p class="hint">如果你心裡還有一些感覺、一些想法——想再多聊聊嗎？</p>
+    <div class="center btns">
+      <a class="btn btn-primary" data-line href="#">和漣心聊聊 🌊</a>
+      <a class="btn btn-ghost" href="story2-speak.html">接著去「說」 →</a>
+    </div>
+  </div>
+</div>
+
+<div class="foot-btns">
+  <a class="btn btn-ghost" href="lianyu.html">回 漣語</a>
+  <a class="btn btn-primary" href="story2-speak.html">下一步：說說看 →</a>
+</div>
+<footer>Cobble 漣心 · Small. Smooth. Powerful.</footer>
+</div>
+<script>
+var PAIRS=[["May is cleaning an old box.", "她正在整理一個舊箱子。"], ["She finds a small photo.", "她找到一張小照片。"], ["She sits down and looks at it.", "她坐下來看著照片。"], ["David walks over.", "David 走了過來。"], ["What are you looking at?", "「妳在看什麼？」"], ["May smiles.", "May 微笑著。"], ["Look. It's us.", "「看，是我們。」"], ["Our first trip together.", "「我們第一次一起旅行。」"], ["David looks at the photo.", "David 看著照片。"], ["We were so young.", "「那時候我們好年輕。」"], ["Yes, May says.", "May 說："], ["We were happy.", "「我們很快樂。」"], ["David smiles.", "David 微笑著。"], ["We are still happy.", "「我們現在依然很快樂。」"], ["May leans on his shoulder.", "May 靠在他的肩膀上。"], ["Do you remember that day?", "「你還記得那一天嗎？」"], ["David nods.", "David 點點頭。"], ["Of course.", "「當然記得。」"], ["I told you something.", "「那天我對你說了一句話。」"], ["What did you say?", "「妳說了什麼？」"], ["I said...", "「我說……」"], ["I want to grow old with you.", "「我想和你一起慢慢變老。」"], ["They sit quietly together.", "他們安靜地坐在一起。"], ["The photo is old.", "照片已經老了。"], ["But their love is still warm.", "但他們的愛依然溫暖。"]], QUES=[["May 在整理什麼？", "What is May cleaning?", "一個舊箱子。"], ["她在箱子裡找到了什麼？", "What does she find?", "一張小照片——他們第一次一起旅行的合照。"], ["照片裡的他們，是年輕還是年老？", "Were they young or old in the photo?", "很年輕。那是很久以前的他們。"], ["那天，May 對 David 說了什麼？", "What did May say that day?", "「我想和你一起慢慢變老。」"], ["故事最後說：照片老了，但什麼依然？", "The photo is old, but what is still warm?", "他們的愛，依然溫暖。"]], rate=1;
+function ttsSeq(arr,lang,nowEl){if(!('speechSynthesis' in window)){alert('這個瀏覽器不支援朗讀，請改用 Chrome 或 Safari 🌊');return;}try{speechSynthesis.cancel();}catch(e){}var i=0;function step(){if(i>=arr.length){if(nowEl)nowEl.textContent='（聽完了 🌊）';return;}var u=new SpeechSynthesisUtterance(arr[i]);u.lang=lang;u.rate=rate;if(nowEl)nowEl.textContent=arr[i];u.onend=function(){i++;step();};speechSynthesis.speak(u);}step();}
+function ttsOne(t,lang){if(!('speechSynthesis' in window))return;try{speechSynthesis.cancel();}catch(e){}var u=new SpeechSynthesisUtterance(t);u.lang=lang||'en-US';u.rate=rate;speechSynthesis.speak(u);}
+function stopTTS(el){try{speechSynthesis.cancel();}catch(e){}if(el)el.textContent='';}
+var EN=PAIRS.map(function(p){return p[0];}),ZH=PAIRS.map(function(p){return p[1];});
+document.querySelectorAll('.speed button').forEach(function(b){b.addEventListener('click',function(){b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');rate=parseFloat(b.dataset.rate);});});
+function unlock(id){var s=document.getElementById(id);s.classList.remove('locked');s.scrollIntoView({behavior:'smooth',block:'start'});}
+// S1
+document.getElementById('playEN1').addEventListener('click',function(){ttsSeq(EN,'en-US',document.getElementById('now1'));});
+document.getElementById('playZH1').addEventListener('click',function(){ttsSeq(ZH,'zh-TW',document.getElementById('now1'));});
+document.getElementById('stop1').addEventListener('click',function(){stopTTS(document.getElementById('now1'));});
+document.getElementById('u2').addEventListener('click',function(){unlock('s2');});
+// S2
+document.getElementById('u3').addEventListener('click',function(){unlock('s3');});
+// S3 sentences
+var sl=document.getElementById('sentList');
+PAIRS.forEach(function(p){var d=document.createElement('div');d.className='sent';d.innerHTML='<button class="say">🔊</button><div><div class="en">'+p[0]+'</div><div class="zh">'+p[1]+'</div></div>';d.querySelector('.say').addEventListener('click',function(){ttsOne(p[0],'en-US');});sl.appendChild(d);});
+document.getElementById('u4').addEventListener('click',function(){unlock('s4');});
+// S4
+document.getElementById('playEN4').addEventListener('click',function(){ttsSeq(EN,'en-US',document.getElementById('now4'));});
+document.getElementById('stop4').addEventListener('click',function(){stopTTS(document.getElementById('now4'));});
+document.getElementById('u5').addEventListener('click',function(){unlock('s5');});
+// S5 questions
+var ql=document.getElementById('quesList');
+QUES.forEach(function(q,idx){var d=document.createElement('div');d.className='q';
+d.innerHTML='<div class="qt">'+(idx+1)+'. '+q[0]+'</div><div class="qbtns"><button class="mini b-zh">🔊 中</button><button class="mini b-en">🔊 英</button><button class="mini b-a">看看答案</button></div><div class="ans">'+q[2]+'</div>';
+d.querySelector('.b-zh').addEventListener('click',function(){ttsOne(q[0],'zh-TW');});
+d.querySelector('.b-en').addEventListener('click',function(){ttsOne(q[1],'en-US');});
+var ans=d.querySelector('.ans');d.querySelector('.b-a').addEventListener('click',function(){ans.classList.toggle('show');});
+ql.appendChild(d);});
+document.getElementById('u6').addEventListener('click',function(){unlock('s6');});
+// S6 card
+document.getElementById('getCard').addEventListener('click',function(){var box=document.getElementById('cardBox');box.style.display='block';var d=new Date();document.getElementById('cardDate').textContent=d.getFullYear()+'.'+(d.getMonth()+1)+'.'+d.getDate()+' · 你陪這個故事走過的時光 🌊';this.style.display='none';});
+document.getElementById('u7').addEventListener('click',function(){unlock('s7');});
+// LINE
+document.querySelectorAll('[data-line]').forEach(function(a){a.setAttribute('href','https://line.me/R/ti/p/@fas5607a');a.target='_blank';a.rel='noopener';});
+</script></body></html>

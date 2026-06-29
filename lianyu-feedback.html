@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="zh-Hant"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>漣語 · 回饋總覽 ｜ Cobble 漣心</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{--cream:#F7F3EA;--card:#FFFDF8;--pebble:#D4CFC4;--pebble-deep:#BBB4A4;--lake:#6FA8DC;--lake-deep:#4E86BE;--lake-tint:rgba(111,168,220,.14);--ink:#3A352D;--ink-soft:#736C5F;--sans:"Noto Sans TC",system-ui,sans-serif;--serif:"Noto Serif TC",serif;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--cream);font-size:17px;line-height:1.7;padding:24px;}
+  .wrap{max-width:760px;margin:0 auto;}
+  h1{font-family:var(--serif);font-weight:600;font-size:1.6rem;text-align:center;margin:8px 0 4px;}
+  .sub{text-align:center;color:var(--ink-soft);font-family:var(--serif);margin:0 0 24px;}
+  .card{background:var(--card);border:1px solid var(--pebble);border-radius:18px;padding:22px 24px;margin:0 0 18px;box-shadow:0 12px 32px -22px rgba(58,53,45,.3);}
+  .card h2{font-family:var(--serif);font-size:1.22rem;margin:0 0 4px;}
+  .card .en{color:var(--ink-soft);font-size:.92rem;margin:0 0 14px;}
+  .bars{display:grid;gap:10px;}
+  .bar-row{display:flex;align-items:center;gap:12px;}
+  .bar-label{width:96px;flex:0 0 auto;font-size:.98rem;}
+  .bar-track{flex:1;height:22px;background:var(--cream);border-radius:999px;overflow:hidden;border:1px solid var(--pebble);}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--lake),var(--lake-deep));border-radius:999px;transition:width .6s ease;}
+  .bar-n{width:52px;flex:0 0 auto;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-soft);}
+  .total{text-align:right;color:var(--ink-soft);font-size:.9rem;margin-top:10px;}
+  .notes{margin-top:14px;border-top:1px dashed var(--pebble-deep);padding-top:12px;}
+  .note{background:var(--lake-tint);border-radius:12px;padding:10px 14px;margin:8px 0;font-family:var(--serif);}
+  .note .meta{font-family:var(--sans);font-size:.78rem;color:var(--ink-soft);margin-top:4px;}
+  .empty{color:var(--ink-soft);font-style:italic;}
+  .status{text-align:center;color:var(--ink-soft);padding:30px;}
+  .refresh{display:block;margin:6px auto 26px;padding:11px 26px;border-radius:999px;border:1.5px solid var(--lake);background:#fff;color:var(--lake-deep);font-family:inherit;font-size:1rem;cursor:pointer;}
+</style></head><body>
+<div class="wrap">
+  <h1>漣語 · 回饋總覽</h1>
+  <p class="sub">受眾走完每個故事後留下的真實反應</p>
+  <button class="refresh" onclick="location.reload()">↻ 重新整理</button>
+  <div id="out"><p class="status">讀取中⋯</p></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+var cfg={apiKey:"AIzaSyACuMuPhnj0IJc61e0soT-kewkkkJpi48k",authDomain:"tzujun-5a91d.firebaseapp.com",databaseURL:"https://tzujun-5a91d-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"tzujun-5a91d",storageBucket:"tzujun-5a91d.firebasestorage.app",messagingSenderId:"844611200436",appId:"1:844611200436:web:83f0db492f6ccae0afbee1"};
+try{ if(window.firebase&&!firebase.apps.length){firebase.initializeApp(cfg);} }catch(e){}
+
+var STORIES=[
+  {key:'story1',title:'點燈的盲人',en:'The Blind Man\u2019s Lantern'},
+  {key:'story2',title:'一張舊照片',en:'The Old Photo · Still Us'},
+  {key:'story3',title:'大石頭先放',en:'Big Stones First · Make Room'}
+];
+var MOODS=[{k:'fun',label:'😊 有趣有感'},{k:'ok',label:'😐 普通'},{k:'hard',label:'🤔 有點難'}];
+
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmtDate(ts){if(!ts)return'';var d=new Date(ts);function z(n){return(n<10?'0':'')+n;}return d.getFullYear()+'.'+z(d.getMonth()+1)+'.'+z(d.getDate());}
+
+function render(items){
+  var out=document.getElementById('out');
+  if(!items){out.innerHTML='<p class="status">目前還沒有任何回饋。<br/>等受眾走完故事、按下表情，就會出現在這裡。</p>';return;}
+  var byStory={};
+  STORIES.forEach(function(s){byStory[s.key]={fun:0,ok:0,hard:0,notes:[]};});
+  Object.keys(items).forEach(function(id){
+    var it=items[id]; if(!it)return; var st=byStory[it.story]; if(!st)return;
+    if(it.mood&&st[it.mood]!=null)st[it.mood]++;
+    if(it.note&&it.note.trim())st.notes.push({note:it.note,mood:it.mood,ts:it.ts});
+  });
+  var html='';
+  STORIES.forEach(function(s){
+    var d=byStory[s.key]; var total=d.fun+d.ok+d.hard; var max=Math.max(d.fun,d.ok,d.hard,1);
+    html+='<div class="card"><h2>'+s.title+'</h2><div class="en">'+s.en+'</div><div class="bars">';
+    MOODS.forEach(function(m){
+      var n=d[m.k]; var w=Math.round(n/max*100);
+      html+='<div class="bar-row"><div class="bar-label">'+m.label+'</div><div class="bar-track"><div class="bar-fill" style="width:'+(n?w:0)+'%"></div></div><div class="bar-n">'+n+'</div></div>';
+    });
+    html+='</div><div class="total">共 '+total+' 則</div>';
+    if(d.notes.length){
+      html+='<div class="notes">';
+      d.notes.sort(function(a,b){return (b.ts||0)-(a.ts||0);}).forEach(function(nt){
+        var mood=(MOODS.filter(function(m){return m.k===nt.mood;})[0]||{}).label||'';
+        html+='<div class="note">「'+esc(nt.note)+'」<div class="meta">'+mood+' · '+fmtDate(nt.ts)+'</div></div>';
+      });
+      html+='</div>';
+    }
+    html+='</div>';
+  });
+  out.innerHTML=html;
+}
+
+try{
+  firebase.database().ref('lianyu_feedback').once('value').then(function(snap){
+    render(snap.val());
+  }).catch(function(e){
+    document.getElementById('out').innerHTML='<p class="status">讀取失敗：'+esc(e.message)+'<br/>請確認 Firebase 規則為測試模式、網路正常。</p>';
+  });
+}catch(e){
+  document.getElementById('out').innerHTML='<p class="status">無法連線 Firebase。</p>';
+}
+</script>
+</body></html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html><html lang="zh-Hant"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<title>讀故事：照片老了，我們依然 ｜ 漣語</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --cream:#F7F3EA; --cream-2:#F1EADC; --cream-deep:#EBE3D2; --card:#FFFDF8;
+    --pebble:#D4CFC4; --pebble-deep:#BBB4A4;
+    --lake:#6FA8DC; --lake-deep:#4E86BE; --lake-tint:rgba(111,168,220,0.14);
+    --ink:#3A352D; --ink-soft:#736C5F;
+    --maxw:1060px; --r:20px;
+    --shadow-soft:0 16px 44px -26px rgba(58,53,45,0.40);
+    --serif:"Noto Serif TC", serif; --sans:"Noto Sans TC", system-ui, sans-serif;
+    --display:"Fraunces","Noto Serif TC", serif;
+    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);font-size:18px;line-height:1.8;
+    background:radial-gradient(120% 80% at 50% -10%, #FBF7EF 0%, var(--cream) 42%, var(--cream-2) 100%);
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--grain);background-size:180px 180px;opacity:.05;mix-blend-mode:multiply;}
+  body > *{position:relative;z-index:1;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  a{color:inherit;text-decoration:none;}
+  .cobble-logo{display:block;height:auto;} .logo-missing{display:none;}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font-family:var(--sans);font-weight:500;font-size:1.05rem;padding:16px 34px;border-radius:999px;cursor:pointer;border:1.5px solid transparent;min-height:56px;transition:transform .25s ease, box-shadow .3s ease, background .25s ease, color .25s ease;}
+  .btn-primary{background:var(--lake);color:#fff;box-shadow:0 14px 30px -14px rgba(78,134,190,.7);}
+  .btn-primary:hover{background:var(--lake-deep);transform:translateY(-3px);}
+  .btn-ghost{background:#fff;color:var(--lake-deep);border-color:var(--lake);}
+  .btn-ghost:hover{background:var(--lake-tint);transform:translateY(-3px);}
+  .btn:focus-visible{outline:3px solid var(--lake-deep);outline-offset:3px;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 24px;max-width:var(--maxw);margin:0 auto;}
+  .topbar .brand{display:flex;align-items:center;gap:10px;}
+  .topbar .brand .cobble-logo{width:42px;}
+  .topbar .name{font-family:var(--serif);font-weight:600;letter-spacing:.14em;font-size:1.12rem;}
+  .back{display:inline-flex;align-items:center;gap:.4em;color:var(--lake-deep);font-weight:500;font-size:.98rem;padding:8px 4px;}
+  .back:hover{text-decoration:underline;}
+
+  .hero{text-align:center;padding:50px 24px 30px;overflow:hidden;}
+  .hero-inner{max-width:760px;margin:0 auto;}
+  .wordmark{font-family:var(--display);font-weight:500;line-height:1.05;letter-spacing:.01em;color:var(--ink);margin:8px 0 0;}
+  .sub-cn{font-family:var(--serif);font-weight:500;letter-spacing:.2em;margin:14px 0 0;color:var(--lake-deep);}
+  .track-tag{display:inline-flex;align-items:center;gap:.5em;background:var(--lake-tint);color:var(--lake-deep);font-weight:600;padding:8px 18px;border-radius:999px;font-size:1rem;}
+
+  .block{padding:8px 0 70px;}
+  .lead{text-align:center;color:var(--ink-soft);max-width:32em;margin:6px auto 0;line-height:1.95;font-family:var(--serif);}
+
+  .flow{max-width:680px;margin:30px auto 0;display:grid;gap:18px;}
+  .flow-stage{background:var(--card);border:1px solid var(--pebble);border-radius:var(--r);padding:26px 24px;box-shadow:var(--shadow-soft);text-align:center;transition:opacity .4s ease;}
+  .flow-stage.locked{opacity:.5;}
+  .flow-stage.locked .stage-body{display:none;}
+  .lock-note{display:none;color:var(--ink-soft);font-size:.96rem;margin:6px 0 0;}
+  .flow-stage.locked .lock-note{display:block;}
+  .stage-no{font-family:var(--display);font-style:italic;color:var(--lake-deep);font-size:.98rem;}
+  .stage-title{font-family:var(--serif);font-weight:600;font-size:1.28rem;letter-spacing:.04em;margin:4px 0 10px;}
+  .stage-text{color:var(--ink-soft);line-height:1.95;margin:0 0 18px;}
+  .stage-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+
+  .speed-toggle{display:inline-flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;justify-content:center;}
+  .speed-toggle button{padding:9px 20px;border-radius:999px;border:1.5px solid var(--pebble-deep);background:#fff;color:var(--ink);font-weight:500;cursor:pointer;min-height:44px;font-family:inherit;}
+  .speed-toggle button.active{background:var(--lake);color:#fff;border-color:var(--lake);}
+  .whole-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+
+  .sent-list{display:grid;gap:12px;margin-top:14px;text-align:left;}
+  .sent-row{background:#fff;border:1px solid var(--pebble);border-radius:14px;padding:15px 16px;display:flex;gap:13px;align-items:center;justify-content:space-between;transition:border-color .25s ease, background .25s ease, transform .2s ease;}
+  .sent-row.playing{border-color:var(--lake);background:var(--lake-tint);transform:translateY(-2px);}
+  .sent-text{flex:1;min-width:0;}
+  .sent-text .en{font-family:var(--display);font-size:1.22rem;color:var(--ink);line-height:1.5;}
+  .sent-text .zh{color:var(--ink-soft);font-size:1rem;margin-top:3px;line-height:1.6;}
+  .hide-zh .sent-text .zh{display:none;}
+  .play-en{display:inline-flex;align-items:center;gap:.3em;padding:8px 14px;border-radius:999px;border:1.5px solid var(--pebble-deep);background:#fff;color:var(--ink);font-size:.95rem;font-weight:500;cursor:pointer;white-space:nowrap;min-height:40px;font-family:inherit;transition:all .2s ease;flex:0 0 auto;}
+  .play-en:hover{border-color:var(--lake);color:var(--lake-deep);background:var(--lake-tint);}
+
+  /* ② 拆字 */
+  .read-card{background:#fff;border:1px solid var(--pebble);border-radius:16px;padding:18px 20px;text-align:left;box-shadow:var(--shadow-soft);}
+  .read-cue{color:var(--ink-soft);font-family:var(--serif);font-size:1.02rem;margin-bottom:10px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .wchip{padding:8px 13px;border-radius:11px;border:1.5px solid var(--pebble-deep);background:#fff;font-family:var(--display);font-size:1.18rem;color:var(--ink);cursor:pointer;transition:all .18s ease;}
+  .wchip:hover{border-color:var(--lake);}
+  .wchip.lit{background:var(--lake-tint);border-color:var(--lake);color:var(--lake-deep);}
+  .chip-whole{margin-left:auto;}
+
+  /* ③ 脈絡閱讀 */
+  .guess-en{font-family:var(--display);font-size:1.35rem;color:var(--ink);line-height:1.5;margin-bottom:12px;}
+  .g-btns{display:flex;gap:10px;flex-wrap:wrap;}
+  .mini{display:inline-flex;align-items:center;gap:.4em;padding:10px 18px;border-radius:999px;border:1.5px solid var(--pebble-deep);background:var(--cream-deep);color:var(--ink);font-weight:500;font-size:.98rem;cursor:pointer;min-height:44px;font-family:inherit;transition:all .2s ease;}
+  .mini:hover{border-color:var(--lake);color:var(--lake-deep);background:var(--lake-tint);}
+  .guess-zh2{display:none;color:var(--lake-deep);font-family:var(--serif);font-size:1.12rem;margin-top:12px;}
+  .read-card.show .guess-zh2{display:block;}
+
+  /* ⑤ 克漏字 */
+  .cloze-card{background:#fff;border:1px solid var(--pebble);border-radius:16px;padding:20px 22px;text-align:left;box-shadow:var(--shadow-soft);}
+  .cloze-sent{font-family:var(--display);font-size:1.32rem;line-height:1.75;color:var(--ink);margin-bottom:14px;}
+  .cloze-blank{display:inline-block;min-width:74px;border-bottom:2.5px solid var(--lake);color:var(--lake-deep);text-align:center;font-weight:600;padding:0 6px;}
+  .cloze-zh{color:var(--ink-soft);font-family:var(--serif);font-size:.98rem;margin-bottom:12px;}
+  .cloze-opts{display:flex;gap:10px;flex-wrap:wrap;}
+  .cloze-opt{padding:10px 18px;border-radius:999px;border:1.5px solid var(--pebble-deep);background:var(--cream-deep);font-family:var(--display);font-size:1.12rem;color:var(--ink);cursor:pointer;min-height:46px;font-family:var(--display);transition:all .18s ease;}
+  .cloze-opt:hover{border-color:var(--lake);}
+  .cloze-opt.right{background:var(--lake);color:#fff;border-color:var(--lake);}
+  .cloze-opt.wrong{animation:shake .35s;border-color:#B5707A;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
+  .cloze-card.done .cloze-opts{opacity:.45;pointer-events:none;}
+
+  .finish-wrap{text-align:center;margin-top:30px;}
+  .finish-msg{display:none;max-width:560px;margin:22px auto 0;background:var(--lake-tint);border:1px solid rgba(111,168,220,.4);border-radius:var(--r);padding:28px;color:var(--lake-deep);font-family:var(--serif);font-size:1.2rem;line-height:1.9;}
+  .reward-stars{font-size:2.2rem;letter-spacing:.3em;margin-bottom:4px;animation:pop .6s ease;}
+  @keyframes pop{0%{transform:scale(.3);opacity:0;}60%{transform:scale(1.15);}100%{transform:scale(1);opacity:1;}}
+
+  .collect-card{width:300px;max-width:86%;height:420px;margin:18px auto 6px;perspective:1200px;cursor:pointer;}
+  .cc-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;}
+  .collect-card.flipped .cc-inner{transform:rotateY(180deg);}
+  .cc-face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;box-shadow:0 22px 50px -24px rgba(78,134,190,.5);border:1px solid rgba(111,168,220,.35);overflow:hidden;}
+  .cc-front{background:linear-gradient(160deg,#FBF8F1,#E8F0F8);}
+  .cc-back{background:linear-gradient(160deg,#EAF1F8,#F3ECDE);transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center;}
+  .cc-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-style:italic;color:var(--lake-deep);font-size:.92rem;letter-spacing:.04em;}
+  .cc-no{font-weight:600;font-style:normal;}
+  .cc-en{font-family:var(--display);font-size:1.5rem;color:var(--ink);line-height:1.45;margin:auto 0 10px;text-align:left;}
+  .cc-zh{color:var(--ink-soft);font-size:1.05rem;text-align:left;}
+  .cc-foot{margin-top:16px;padding-top:14px;border-top:1px dashed var(--pebble-deep);display:flex;justify-content:space-between;align-items:center;color:var(--ink-soft);font-size:.85rem;}
+  .cc-emblem{width:30px;height:22px;border-radius:60% 40% 56% 44%/58% 56% 44% 42%;background:radial-gradient(120% 120% at 32% 26%,#fff,#cfc8ba 60%,#a59c8d);}
+  .cc-back .bk-title{font-family:var(--serif);font-weight:600;font-size:1.4rem;color:var(--ink);}
+  .cc-back .bk-en{font-family:var(--display);font-style:italic;color:var(--ink-soft);margin-top:2px;}
+  .cc-back .bk-meaning{font-family:var(--serif);color:var(--lake-deep);font-size:1.2rem;line-height:1.8;margin:10px 0;}
+  .cc-back .bk-mark{font-family:var(--display);color:var(--ink-soft);font-size:.95rem;}
+  .flip-hint{color:var(--ink-soft);font-size:.88rem;}
+  .cc-back .flip-hint{margin-top:14px;}
+  .bk-sign{width:100%;margin:12px 0 2px;display:flex;flex-direction:column;gap:9px;}
+  .sign-row{display:flex;align-items:flex-end;justify-content:center;gap:10px;}
+  .sign-label{font-family:var(--serif);font-size:.9rem;color:var(--ink-soft);white-space:nowrap;}
+  .sign-date{font-family:var(--display);font-size:1.05rem;color:var(--lake-deep);letter-spacing:.06em;}
+  .sign-line{min-width:150px;border-bottom:1.5px solid var(--pebble-deep);font-family:var(--display);font-style:italic;font-size:1.18rem;color:var(--ink);min-height:1.7em;line-height:1.7em;outline:none;text-align:center;padding:0 8px;}
+  .sign-line:empty:before{content:attr(data-ph);color:var(--pebble-deep);font-style:normal;font-size:.92rem;}
+  .sign-line:focus{border-bottom-color:var(--lake);}
+  .ai-soon{margin-top:20px;border:1.6px dashed var(--lake);border-radius:16px;padding:18px 20px;background:linear-gradient(160deg,#FBF8F1,#EAF1F8);text-align:center;}
+  .ai-soon-icon{font-size:1.7rem;line-height:1;}
+  .ai-soon-t{font-family:var(--serif);font-weight:600;font-size:1.18rem;color:var(--ink);margin-top:6px;letter-spacing:.04em;}
+  .ai-soon-d{color:var(--ink-soft);font-size:1rem;margin-top:8px;line-height:1.8;}
+  .ai-soon-badge{display:inline-block;margin-top:10px;background:var(--lake-tint);color:var(--lake-deep);font-weight:600;font-size:.85rem;padding:6px 16px;border-radius:999px;letter-spacing:.04em;}
+  .confetti-pc{position:fixed;top:-12px;width:9px;height:14px;border-radius:2px;z-index:9999;pointer-events:none;}
+
+  footer{text-align:center;padding:54px 24px 48px;background:linear-gradient(180deg,#ECE3D1 0%, #E4D9C3 70%, #DCCFB4 100%);border-top:1px solid rgba(187,180,164,.5);}
+  footer .cobble-logo{width:min(180px,52vw);margin:0 auto 6px;}
+  .foot-mark{font-family:var(--display);font-weight:500;font-size:1.7rem;letter-spacing:.02em;color:var(--ink);}
+  .foot-cn{font-family:var(--serif);letter-spacing:.3em;font-size:1rem;margin-top:2px;color:var(--ink-soft);}
+  .foot-tag{font-family:var(--display);font-style:italic;color:var(--lake-deep);margin-top:12px;font-size:1rem;letter-spacing:.04em;}
+
+  @media (max-width:720px){ body{font-size:17px;} .hero{padding:40px 20px 24px;} .sent-row{flex-wrap:wrap;} }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style></head><body>
+
+<nav class="topbar">
+  <a class="back" href="story2-speak.html">← 回 說</a>
+  <div class="brand"><img class="cobble-logo" src="logo.png" alt="" onerror="this.classList.add('logo-missing')"/><span class="name">漣語</span></div>
+</nav>
+
+<header class="hero"><div class="hero-inner">
+  <span class="track-tag">📖 讀讀看</span>
+  <h1 class="wordmark" style="font-size:clamp(2.1rem,6.2vw,3.2rem);">照片老了，我們依然</h1>
+  <p class="sub-cn" style="font-size:1.05rem;letter-spacing:.1em;">The Old Photo · Still Us</p>
+</div></header>
+
+<section class="block"><div class="wrap">
+  <p class="lead">看得懂，也讀得順。五個小關卡，慢慢把這個故事讀進心裡。<br/>讀錯沒關係，多看一次，字就熟了。</p>
+
+  <div class="flow">
+
+    <!-- 第 1 關 -->
+    <div class="flow-stage" id="stage1">
+      <div class="stage-no">第 1 關</div>
+      <div class="stage-title">① 先聽一遍整篇</div>
+      <div class="stage-body">
+        <p class="stage-text">眼睛看著英文，耳朵聽一遍，讓聲音和文字對起來。</p>
+        <div class="speed-toggle" id="speed1">
+          <button data-rate="0.72">慢慢聽</button>
+          <button data-rate="0.9" class="active">正常</button>
+        </div>
+        <div class="whole-btns">
+          <button class="btn btn-primary" data-playall>▶　播放整篇</button>
+          <button class="btn btn-ghost" data-stop>■　停</button>
+        </div>
+        <div class="sent-list" id="list1"></div>
+        <div class="stage-btns" style="margin-top:22px;"><button class="btn btn-primary" data-next="stage2">看完了，開始拆字 →</button></div>
+      </div>
+    </div>
+
+    <!-- 第 2 關 -->
+    <div class="flow-stage locked" id="stage2">
+      <div class="stage-no">第 2 關</div>
+      <div class="stage-title">② 拆字遊戲</div>
+      <p class="lock-note">完成上一關後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">一個字一個字點點看，每個字都會念給你聽。先把字看熟，整句就好讀了。</p>
+        <div style="display:grid;gap:14px;margin-top:8px;" id="list2"></div>
+        <div class="stage-btns" style="margin-top:22px;"><button class="btn btn-primary" data-next="stage3">字都看過了 →</button></div>
+      </div>
+    </div>
+
+    <!-- 第 3 關 -->
+    <div class="flow-stage locked" id="stage3">
+      <div class="stage-no">第 3 關</div>
+      <div class="stage-title">③ 脈絡閱讀</div>
+      <p class="lock-note">完成上一關後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">先讀英文，自己猜猜看是什麼意思，再按「看中文」對一下。讀懂的感覺，比背更重要。</p>
+        <div style="display:grid;gap:14px;margin-top:8px;" id="list3"></div>
+        <div class="stage-btns" style="margin-top:22px;"><button class="btn btn-primary" data-next="stage4">讀懂一輪了 →</button></div>
+      </div>
+    </div>
+
+    <!-- 第 4 關 -->
+    <div class="flow-stage locked" id="stage4">
+      <div class="stage-no">第 4 關</div>
+      <div class="stage-title">④ 連起來，自己讀順</div>
+      <p class="lock-note">完成上一關後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">這次把整篇連起來，自己小聲讀一遍。想挑戰就把中文收起來，只看英文讀。</p>
+        <div class="whole-btns" style="margin-bottom:6px;">
+          <button class="btn btn-ghost" id="zhToggle">收起中文，只讀英文</button>
+          <button class="btn btn-ghost" data-playall2>▶ 卡住聽整篇</button>
+        </div>
+        <div class="sent-list" id="list4"></div>
+        <div class="stage-btns" style="margin-top:22px;"><button class="btn btn-primary" data-next="stage5">我讀順了 →</button></div>
+      </div>
+    </div>
+
+    <!-- 第 5 關 -->
+    <div class="flow-stage locked" id="stage5">
+      <div class="stage-no">第 5 關</div>
+      <div class="stage-title">⑤ 克漏字</div>
+      <p class="lock-note">完成上一關後解鎖 🔒</p>
+      <div class="stage-body">
+        <p class="stage-text">每句少了一個字，從下面選一個補回去。選對了會念整句給你聽。慢慢選，選錯再試就好。</p>
+        <div style="display:grid;gap:14px;margin-top:8px;" id="list5"></div>
+        <div class="finish-wrap">
+          <button class="btn btn-primary" data-finish>我做完了 ✦</button>
+          <div class="finish-msg" id="finishMsg">
+            <div class="reward-stars" aria-hidden="true">⭐ ⭐</div>
+            聽、說、讀都走過一遍了，這張漣語卡是你的 🌊
+            <div class="collect-card" id="rewardCard"><div class="cc-inner">
+              <div class="cc-face cc-front">
+                <div class="cc-top"><span>漣語卡 · Ripple Card</span><span class="cc-no">No.02</span></div>
+                <div class="cc-en">But their love is still warm.</div>
+                <div class="cc-zh">但他們的愛依然溫暖。</div>
+                <div class="cc-foot"><span>照片老了，我們依然</span><span class="cc-emblem" aria-hidden="true"></span></div>
+              </div>
+              <div class="cc-face cc-back">
+                <div class="bk-title">照片老了，我們依然</div>
+                <div class="bk-en">The Old Photo · Still Us</div>
+                <div class="bk-meaning">照片會老，<br/>愛不會。</div>
+                <div class="bk-sign">
+                  <div class="sign-row"><span class="sign-label">領取日</span><span class="sign-date" id="cardDate">—</span></div>
+                  <div class="sign-row"><span class="sign-label">簽名</span><span class="sign-line" id="cardSign" contenteditable="true" data-ph="簽上你的名字"></span></div>
+                </div>
+                <div class="bk-mark">Cobble 漣心</div>
+                <div class="flip-hint">點一下翻回正面</div>
+              </div>
+            </div></div>
+            <p class="flip-hint" style="text-align:center;margin-top:6px;">✦ 點卡片可翻面 ✦</p>
+            <div style="font-family:var(--display);font-style:italic;color:var(--lake-deep);line-height:1.75;font-size:1.12rem;margin-top:16px;text-align:center;">🌱 One story.<br/>One ripple.<br/>One step forward.</div>
+            <div class="ai-soon">
+              <div class="ai-soon-icon">💬</div>
+              <div class="ai-soon-t">AI 老友互聊</div>
+              <div class="ai-soon-d">用這個故事，和 AI 老友自在聊上幾句，<br/>像跟老朋友看著照片話當年。</div>
+              <div class="ai-soon-badge">即將開放 🔒</div>
+            </div>
+            <div style="margin-top:18px;text-align:center;"><a href="https://youtu.be/uLX0xhjCO4I" target="_blank" rel="noopener" class="btn btn-ghost">🎵 聽主題曲〈照片老了，我們依然 / Still Us〉</a></div>
+            <style>
+              #fbBox .fb-btn{padding:12px 20px;border:1.5px solid var(--pebble-deep);border-radius:999px;background:#fff;color:var(--ink);font-family:inherit;font-size:1.05rem;min-height:50px;cursor:pointer;transition:all .2s ease;}
+              #fbBox .fb-btn:hover{border-color:var(--lake);color:var(--lake-deep);background:var(--lake-tint);}
+              #fbBox .fb-btn.on{background:var(--lake);color:#fff;border-color:var(--lake);}
+            </style>
+            <div id="fbBox" data-story="story2" style="margin-top:22px;padding-top:20px;border-top:1px dashed var(--pebble-deep);text-align:center;">
+              <p style="font-family:var(--serif);color:var(--ink);font-size:1.05rem;margin:0 0 12px;">這個故事，對你來說感覺如何？</p>
+              <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                <button type="button" class="fb-btn" data-mood="fun">😊 有趣有感</button>
+                <button type="button" class="fb-btn" data-mood="ok">😐 普通</button>
+                <button type="button" class="fb-btn" data-mood="hard">🤔 有點難</button>
+              </div>
+              <p id="fbThanks" style="display:none;color:var(--lake-deep);font-family:var(--serif);margin:14px 0 0;">謝謝你的回饋 🤍</p>
+              <div id="fbNoteWrap" style="display:none;margin-top:10px;">
+                <textarea id="fbNote" rows="2" placeholder="想多說一句嗎？（不用也沒關係）" style="width:100%;max-width:420px;border:1px solid var(--pebble);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:1rem;resize:vertical;box-sizing:border-box;"></textarea>
+                <div style="margin-top:8px;"><button type="button" id="fbSend" class="btn btn-ghost">送出</button></div>
+              </div>
+              <p id="fbDone" style="display:none;color:var(--lake-deep);font-family:var(--serif);margin:12px 0 0;">收到了，謝謝你 🌱</p>
+            </div>
+            <div class="stage-btns" style="margin-top:14px;"><a href="story2-listen.html" class="btn btn-primary">回故事開頭，再走一遍 →</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div></section>
+
+<footer>
+  <img class="cobble-logo" src="logo.png" alt="" onerror="this.classList.add('logo-missing')"/>
+  <div class="foot-mark">漣語</div>
+  <div class="foot-cn">Cobble 漣心</div>
+  <div class="foot-tag">Small. Smooth. Powerful.</div>
+</footer>
+
+<script>
+var LINES=[
+["May is cleaning an old box.","她正在整理一個舊箱子。"],
+["She finds a small photo.","她找到一張小照片。"],
+["She sits down and looks at it.","她坐下來看著照片。"],
+["David walks over.","David 走了過來。"],
+["“What are you looking at?”","「妳在看什麼？」"],
+["May smiles.","May 微笑著。"],
+["“Look. It’s us.”","「看，是我們。」"],
+["“Our first trip together.”","「我們第一次一起旅行。」"],
+["David looks at the photo.","David 看著照片。"],
+["“We were so young.”","「那時候我們好年輕。」"],
+["“Yes,” May says.","May 說："],
+["“We were happy.”","「我們很快樂。」"],
+["David smiles.","David 微笑著。"],
+["“We are still happy.”","「我們現在依然很快樂。」"],
+["May leans on his shoulder.","May 靠在他的肩膀上。"],
+["“Do you remember that day?”","「你還記得那一天嗎？」"],
+["David nods.","David 點點頭。"],
+["“Of course.”","「當然記得。」"],
+["“I told you something.”","「那天我對你說了一句話。」"],
+["“What did you say?”","「妳說了什麼？」"],
+["“I said…”","「我說……」"],
+["“I want to grow old with you.”","「我想和你一起慢慢變老。」"],
+["They sit quietly together.","他們安靜地坐在一起。"],
+["The photo is old.","照片已經老了。"],
+["But their love is still warm.","但他們的愛依然溫暖。"]
+];
+var CHIP_IDX=[1,3,5,8,9,13,16,23];          // ② 拆字
+var CTX_IDX=[0,2,6,7,11,14,21,24];          // ③ 脈絡閱讀
+var CLOZE=[
+ {t:'She finds a small ___ .', a:'photo', zh:'她找到一張小照片。', o:['photo','box','day']},
+ {t:'“We were so ___ .”', a:'young', zh:'「那時候我們好年輕。」', o:['young','happy','old']},
+ {t:'“We are still ___ .”', a:'happy', zh:'「我們現在依然很快樂。」', o:['happy','young','warm']},
+ {t:'May leans on his ___ .', a:'shoulder', zh:'她靠在他的肩膀上。', o:['shoulder','photo','hand']},
+ {t:'“I want to grow ___ with you.”', a:'old', zh:'「我想和你一起慢慢變老。」', o:['old','young','warm']},
+ {t:'But their love is still ___ .', a:'warm', zh:'但他們的愛依然溫暖。', o:['warm','old','young']}
+];
+
+/* TTS */
+var RATE=0.9,_CV=[];
+function _loadV(){try{_CV=window.speechSynthesis.getVoices()||[];}catch(e){_CV=[];}}
+if('speechSynthesis' in window){_loadV();window.speechSynthesis.onvoiceschanged=_loadV;}
+function _pickV(lang){if(!_CV.length)_loadV();var p=lang.toLowerCase().slice(0,2);var m=_CV.filter(function(v){return v.lang&&v.lang.toLowerCase().indexOf(p)===0;});return m[0]||null;}
+function clean(t){return t.replace(/[“”]/g,'');}
+function speak(t,lang,rt){
+  if(!('speechSynthesis' in window)){alert('這個瀏覽器不支援朗讀，請改用 Chrome 或 Safari 開啟 🌊');return;}
+  try{window.speechSynthesis.cancel();}catch(e){}
+  var u=new SpeechSynthesisUtterance(clean(t));u.lang=lang;u.rate=rt||(lang.indexOf('en')===0?RATE:0.98);
+  var v=_pickV(lang);if(v)u.voice=v;try{window.speechSynthesis.resume();}catch(e){}
+  window.speechSynthesis.speak(u);
+}
+function esc(s){return s.replace(/"/g,'&quot;');}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* 第 1 關 */
+(function(){var b=document.getElementById('list1');LINES.forEach(function(L){
+  var d=document.createElement('div');d.className='sent-row';d.setAttribute('data-en',L[0]);
+  d.innerHTML='<div class="sent-text"><div class="en">'+L[0]+'</div><div class="zh">'+L[1]+'</div></div><button class="play-en" data-en="'+esc(L[0])+'">🔊 聽</button>';
+  b.appendChild(d);});})();
+
+/* 第 2 關 拆字 */
+(function(){var b=document.getElementById('list2');CHIP_IDX.forEach(function(i){var L=LINES[i];
+  var words=clean(L[0]).replace(/\./g,' .').replace(/,/g,' ,').split(/\s+/).filter(Boolean);
+  var chips=words.map(function(w){return '<span class="wchip" data-w="'+esc(w)+'">'+w+'</span>';}).join('');
+  var d=document.createElement('div');d.className='read-card';
+  d.innerHTML='<div class="read-cue">'+L[1]+'</div><div class="chip-row">'+chips+'<button class="play-en chip-whole" data-en="'+esc(L[0])+'">🔊 整句</button></div>';
+  b.appendChild(d);});})();
+
+/* 第 3 關 脈絡閱讀 */
+(function(){var b=document.getElementById('list3');CTX_IDX.forEach(function(i){var L=LINES[i];
+  var d=document.createElement('div');d.className='read-card';
+  d.innerHTML='<div class="guess-en">'+L[0]+'</div><div class="g-btns"><button class="play-en" data-en="'+esc(L[0])+'">🔊 聽一次</button><button class="mini" data-reveal>看中文</button></div><div class="guess-zh2">'+L[1]+'</div>';
+  b.appendChild(d);});})();
+
+/* 第 4 關 連起來讀 */
+(function(){var b=document.getElementById('list4');LINES.forEach(function(L){
+  var d=document.createElement('div');d.className='sent-row';d.setAttribute('data-en',L[0]);
+  d.innerHTML='<div class="sent-text"><div class="en">'+L[0]+'</div><div class="zh">'+L[1]+'</div></div><button class="play-en" data-en="'+esc(L[0])+'">🔊</button>';
+  b.appendChild(d);});})();
+
+/* 第 5 關 克漏字 */
+(function(){var b=document.getElementById('list5');CLOZE.forEach(function(c){
+  var opts=shuffle(c.o).map(function(w){return '<button class="cloze-opt" data-w="'+esc(w)+'">'+w+'</button>';}).join('');
+  var sent=c.t.replace('___','<span class="cloze-blank">＿＿</span>');
+  var d=document.createElement('div');d.className='cloze-card';d.setAttribute('data-a',c.a);d.setAttribute('data-full',esc(c.t.replace('___',c.a)));
+  d.innerHTML='<div class="cloze-sent">'+sent+'</div><div class="cloze-zh">'+c.zh+'</div><div class="cloze-opts">'+opts+'</div>';
+  b.appendChild(d);});})();
+
+/* 撒花 */
+function confetti(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var cs=['#6FA8DC','#E7C9A0','#D6A45F','#B5707A','#6E8157','#EDE9E0'];
+  for(var k=0;k<40;k++){var p=document.createElement('div');p.className='confetti-pc';
+    p.style.left=(Math.random()*100)+'vw';p.style.background=cs[Math.floor(Math.random()*cs.length)];
+    var dur=2400+Math.random()*1600,delay=Math.random()*500,x=(Math.random()*2-1)*120,rot=Math.random()*720;
+    document.body.appendChild(p);
+    if(p.animate){p.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+x+'px,100vh) rotate('+rot+'deg)',opacity:.9}],{duration:dur,delay:delay});}
+    setTimeout((function(el){return function(){el.remove();};})(p),dur+delay+300);}
+}
+
+/* 互動 */
+document.addEventListener('click',function(e){
+  var pe=e.target.closest('.play-en');
+  if(pe){speak(pe.getAttribute('data-en'),'en-US');var r=pe.closest('.sent-row');if(r){r.classList.add('playing');setTimeout(function(){r.classList.remove('playing');},1300);}return;}
+});
+// 速度
+document.getElementById('speed1').addEventListener('click',function(e){var b=e.target.closest('button[data-rate]');if(!b)return;RATE=parseFloat(b.getAttribute('data-rate'));this.querySelectorAll('button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');});
+// 拆字 點字
+document.getElementById('list2').addEventListener('click',function(e){var c=e.target.closest('.wchip');if(!c)return;speak(c.getAttribute('data-w'),'en-US',0.85);c.classList.add('lit');});
+// 脈絡 看中文
+document.getElementById('list3').addEventListener('click',function(e){var b=e.target.closest('[data-reveal]');if(!b)return;b.closest('.read-card').classList.add('show');b.textContent='✓ 已對照';});
+// 第 4 關 收中文
+document.getElementById('zhToggle').addEventListener('click',function(){var box=document.getElementById('list4');box.classList.toggle('hide-zh');this.textContent=box.classList.contains('hide-zh')?'顯示中文':'收起中文，只讀英文';});
+// 克漏字
+document.getElementById('list5').addEventListener('click',function(e){
+  var o=e.target.closest('.cloze-opt');if(!o)return;var card=o.closest('.cloze-card');if(card.classList.contains('done'))return;
+  if(o.getAttribute('data-w')===card.getAttribute('data-a')){
+    o.classList.add('right');card.classList.add('done');
+    card.querySelector('.cloze-blank').textContent=card.getAttribute('data-a');
+    speak(card.getAttribute('data-full'),'en-US',0.85);
+  }else{o.classList.add('wrong');setTimeout(function(){o.classList.remove('wrong');},400);}
+});
+// 解鎖
+document.querySelectorAll('[data-next]').forEach(function(btn){btn.addEventListener('click',function(){var nx=document.getElementById(btn.getAttribute('data-next'));if(nx){nx.classList.remove('locked');try{nx.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}}});});
+// playall（第 1 關 + 第 4 關）
+function runPlayAll(sel){
+  if(!('speechSynthesis' in window)){alert('這個瀏覽器不支援朗讀，請改用 Chrome 或 Safari 開啟');return;}
+  var rows=[].slice.call(document.querySelectorAll(sel+' .sent-row'));window.speechSynthesis.cancel();var i=0,go=true;
+  window._stopAll=function(){go=false;};
+  (function next(){if(!go||i>=rows.length){rows.forEach(function(r){r.classList.remove('playing');});return;}
+    rows.forEach(function(r){r.classList.remove('playing');});var r=rows[i];r.classList.add('playing');try{r.scrollIntoView({block:'center',behavior:'smooth'});}catch(e){}
+    var u=new SpeechSynthesisUtterance(clean(r.getAttribute('data-en')));u.lang='en-US';u.rate=RATE;var v=_pickV('en-US');if(v)u.voice=v;
+    u.onend=function(){r.classList.remove('playing');i++;setTimeout(next,360);};window.speechSynthesis.speak(u);})();
+}
+document.querySelector('[data-playall]').addEventListener('click',function(){runPlayAll('#list1');});
+document.querySelector('[data-playall2]').addEventListener('click',function(){runPlayAll('#list4');});
+document.querySelector('[data-stop]').addEventListener('click',function(){if(window._stopAll)window._stopAll();try{window.speechSynthesis.cancel();}catch(e){}document.querySelectorAll('.sent-row').forEach(function(r){r.classList.remove('playing');});});
+// 完成
+document.querySelector('[data-finish]').addEventListener('click',function(){var m=document.getElementById('finishMsg');m.style.display='block';try{m.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}confetti();});
+document.getElementById('rewardCard').addEventListener('click',function(){this.classList.toggle('flipped');});
+
+/* 漣語卡：當天日期 + 簽名欄 */
+(function(){
+  var d=new Date();
+  var s=d.getFullYear()+'.'+('0'+(d.getMonth()+1)).slice(-2)+'.'+('0'+d.getDate()).slice(-2);
+  var de=document.getElementById('cardDate');if(de)de.textContent=s;
+  var sg=document.getElementById('cardSign');
+  if(sg){['click','mousedown','touchstart','keydown','keyup'].forEach(function(ev){sg.addEventListener(ev,function(e){e.stopPropagation();});});}
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+(function(){
+  var cfg={apiKey:"AIzaSyACuMuPhnj0IJc61e0soT-kewkkkJpi48k",authDomain:"tzujun-5a91d.firebaseapp.com",databaseURL:"https://tzujun-5a91d-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"tzujun-5a91d",storageBucket:"tzujun-5a91d.firebasestorage.app",messagingSenderId:"844611200436",appId:"1:844611200436:web:83f0db492f6ccae0afbee1"};
+  try{ if(window.firebase&&!firebase.apps.length){firebase.initializeApp(cfg);} }catch(e){}
+  var lastKey=null;
+  function fbMood(story,mood){try{var ref=firebase.database().ref('lianyu_feedback').push({story:story,mood:mood,note:'',ts:Date.now()});lastKey=ref.key;}catch(e){}}
+  function fbNote(story,txt){try{if(lastKey){firebase.database().ref('lianyu_feedback/'+lastKey).update({note:txt});}else{firebase.database().ref('lianyu_feedback').push({story:story,mood:'',note:txt,ts:Date.now()});}}catch(e){}}
+  var box=document.getElementById('fbBox'); if(!box) return;
+  var story=box.getAttribute('data-story');
+  box.querySelectorAll('[data-mood]').forEach(function(b){
+    b.addEventListener('click',function(){
+      box.querySelectorAll('[data-mood]').forEach(function(x){x.classList.remove('on');});
+      this.classList.add('on');
+      fbMood(story,this.getAttribute('data-mood'));
+      document.getElementById('fbThanks').style.display='block';
+      document.getElementById('fbNoteWrap').style.display='block';
+    });
+  });
+  var sb=document.getElementById('fbSend');
+  if(sb){sb.addEventListener('click',function(){
+    var t=document.getElementById('fbNote').value.trim();
+    if(t){fbNote(story,t);}
+    document.getElementById('fbNoteWrap').style.display='none';
+    document.getElementById('fbDone').style.display='block';
+  });}
+})();
+</script>
+</body></html>
