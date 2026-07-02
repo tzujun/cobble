@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>漣漣的小水滴世界</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F7F3EA; --ink:#2f4d6e; --blue:#4E86BE; --blue2:#6FA8DC; --soft:#5a7795; }
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ min-height:100%; background:var(--cream); color:var(--ink);
+    font-family:"Noto Serif TC",serif; -webkit-font-smoothing:antialiased; }
+  body{ position:relative; overflow-x:hidden; padding:max(28px,env(safe-area-inset-top)) 20px max(40px,env(safe-area-inset-bottom)); }
+
+  /* 背景漣漪 */
+  .ripples{ position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .ring{ position:absolute; border:1.5px solid rgba(111,168,220,0.18); border-radius:50%;
+    left:50%; top:38%; transform:translate(-50%,-50%); animation:spread 9s ease-out infinite; }
+  .ring:nth-child(2){ animation-delay:3s; } .ring:nth-child(3){ animation-delay:6s; }
+  @keyframes spread{ 0%{ width:10vmin; height:10vmin; opacity:.5; } 100%{ width:170vmin; height:170vmin; opacity:0; } }
+
+  .wrap{ position:relative; z-index:1; max-width:1100px; margin:0 auto; display:flex; flex-direction:column; align-items:center; text-align:center; }
+
+  .drop{ font-size:clamp(48px,11vmin,120px); filter:drop-shadow(0 8px 20px rgba(78,134,190,0.3)); margin-bottom:clamp(8px,1.6vmin,18px); }
+  .eyebrow{ font-family:"Fraunces",serif; letter-spacing:.42em; font-size:clamp(12px,1.9vmin,20px); color:var(--blue2); padding-left:.42em; margin-bottom:clamp(12px,1.8vmin,22px); }
+  h1{ font-weight:500; font-size:clamp(28px,6vmin,66px); line-height:1.45; color:#27486b; margin-bottom:clamp(12px,1.8vmin,20px); }
+  .sub{ font-size:clamp(15px,2.9vmin,28px); line-height:1.95; color:var(--soft); max-width:26em; }
+  .tagline{ font-family:"Fraunces",serif; font-style:italic; font-size:clamp(14px,2.3vmin,24px); color:var(--blue); margin-top:clamp(14px,2vmin,24px); }
+
+  .doors{ width:100%; margin-top:clamp(30px,5vmin,64px); display:grid; gap:clamp(16px,2.4vmin,28px);
+    grid-template-columns:1fr; }
+  @media(min-width:760px){ .doors{ grid-template-columns:repeat(2,1fr); } }
+  @media(min-width:1100px){ .doors{ grid-template-columns:repeat(3,1fr); } }
+
+  .door{ display:block; text-decoration:none; color:inherit; background:#fff; border:1px solid rgba(78,134,190,0.16);
+    border-radius:clamp(18px,2.4vmin,28px); padding:clamp(26px,3.4vmin,44px) clamp(22px,3vmin,34px);
+    box-shadow:0 12px 30px rgba(78,134,190,0.12); transition:transform .2s ease, box-shadow .2s ease; }
+  .door:hover,.door:focus-visible{ transform:translateY(-4px); box-shadow:0 18px 40px rgba(78,134,190,0.22); outline:none; }
+  .door:focus-visible{ border-color:var(--blue2); }
+  .door .ic{ font-size:clamp(44px,7vmin,84px); line-height:1; }
+  .door h2{ font-weight:700; font-size:clamp(22px,3.4vmin,38px); color:#27486b; margin:clamp(10px,1.6vmin,18px) 0 clamp(6px,1vmin,12px); }
+  .door .mood{ display:inline-block; font-size:clamp(13px,2vmin,22px); color:var(--blue); background:rgba(111,168,220,0.12);
+    padding:4px 14px; border-radius:999px; margin-bottom:clamp(8px,1.4vmin,16px); }
+  .door p{ font-size:clamp(14.5px,2.4vmin,26px); line-height:1.85; color:var(--soft); }
+
+  .foot{ margin-top:clamp(34px,5vmin,64px); display:flex; flex-direction:column; align-items:center; gap:clamp(10px,1.6vmin,18px); }
+  .back{ text-decoration:none; font-family:inherit; font-size:clamp(15px,2.4vmin,26px); color:var(--blue);
+    border:1.5px solid var(--blue2); border-radius:999px; padding:clamp(11px,1.6vmin,18px) clamp(30px,4vmin,52px); transition:all .15s ease; }
+  .back:hover,.back:focus-visible{ background:var(--blue2); color:#fff; outline:none; }
+  .note{ font-size:clamp(12.5px,1.9vmin,20px); color:#9aaabe; line-height:1.8; max-width:24em; }
+</style>
+</head>
+<body>
+  <div class="ripples"><div class="ring"></div><div class="ring"></div><div class="ring"></div></div>
+  <div class="wrap">
+    <div class="drop">💧</div>
+    <div class="eyebrow">漣心 · 親子</div>
+    <h1>漣漣的小水滴世界</h1>
+    <div class="sub">想靜一靜、想動一動、想唱唱歌，<br>都可以！挑一扇門，一起進來玩 🌿</div>
+    <div class="tagline">和漣漣，一起盪一圈開心的漣漪</div>
+
+    <div class="doors">
+      <a class="door" href="jingshui_v4.html">
+        <div class="ic">💧</div>
+        <h2>靜水</h2>
+        <div class="mood">心裡亂亂的時候</div>
+        <p>和漣漣一起深呼吸，<br>看亂亂的水，慢慢靜下來。</p>
+      </a>
+      <a class="door" href="dongyidong.html">
+        <div class="ic">🏃</div>
+        <h2>動一動</h2>
+        <div class="mood">想放電的時候</div>
+        <p>一起跳、一起跑，<br>陪漣漣抵達終點。</p>
+      </a>
+      <a class="door" href="ziyou.html">
+        <div class="ic">🎵</div>
+        <h2>聲音水池</h2>
+        <div class="mood">想自己玩的時候</div>
+        <p>在水面上點一點、畫一畫，<br>一起變出一首歌。</p>
+      </a>
+      <a class="door" href="qin.html">
+        <div class="ic">🎹</div>
+        <h2>漣漣的鋼琴</h2>
+        <div class="mood">想唱歌的時候</div>
+        <p>上面真鋼琴、兩手一起彈；<br>下面怎麼彈，都好聽。</p>
+      </a>
+      <a class="door" href="qingxu.html">
+        <div class="ic">🎭</div>
+        <h2>情緒小劇場</h2>
+        <div class="mood">給爸媽・一起認識情緒</div>
+        <p>哭、鬧、笑、拗、乖巧，<br>看看四歲的心情長怎樣。</p>
+      </a>
+    </div>
+
+    <div class="foot">
+      <a class="back" href="huifeng.html">✍️ 給爸媽的回饋</a>
+      <a class="back" href="../index.html">回到漣心</a>
+      <div class="note">每一扇門，都是漣漣陪你玩的一種方式。<br>漣心 · 親子互動 ｜ 為四歲的漣漣打造 💧</div>
+    </div>
+  </div>
+</body>
+</html>

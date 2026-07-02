@@ -276,6 +276,25 @@
           </div></div>
           <p class="flip-hint" style="text-align:center;margin-top:6px;">✦ 點卡片可翻面 ✦</p>
           <div style="font-family:var(--display);font-style:italic;color:var(--lake-deep);font-size:1.12rem;line-height:1.85;margin-top:16px;text-align:center;">🌱 One story.<br/>One ripple.<br/>One step forward.</div>
+          <style>
+            #fbBox .fb-btn{padding:12px 20px;border:1.5px solid var(--pebble-deep);border-radius:999px;background:#fff;color:var(--ink);font-family:inherit;font-size:1.05rem;min-height:50px;cursor:pointer;transition:all .2s ease;}
+            #fbBox .fb-btn:hover{border-color:var(--lake);color:var(--lake-deep);background:var(--lake-tint);}
+            #fbBox .fb-btn.on{background:var(--lake);color:#fff;border-color:var(--lake);}
+          </style>
+          <div id="fbBox" data-story="story1" style="margin-top:22px;padding-top:20px;border-top:1px dashed var(--pebble-deep);text-align:center;">
+            <p style="font-family:var(--serif);color:var(--ink);font-size:1.05rem;margin:0 0 12px;">這個故事，對你來說感覺如何？</p>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+              <button type="button" class="fb-btn" data-mood="fun">😊 有趣有感</button>
+              <button type="button" class="fb-btn" data-mood="ok">😐 普通</button>
+              <button type="button" class="fb-btn" data-mood="hard">🤔 有點難</button>
+            </div>
+            <p id="fbThanks" style="display:none;color:var(--lake-deep);font-family:var(--serif);margin:14px 0 0;">謝謝你的回饋 🤍</p>
+            <div id="fbNoteWrap" style="display:none;margin-top:10px;">
+              <textarea id="fbNote" rows="2" placeholder="想多說一句嗎？（不用也沒關係）" style="width:100%;max-width:420px;border:1px solid var(--pebble);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:1rem;resize:vertical;box-sizing:border-box;"></textarea>
+              <div style="margin-top:8px;"><button type="button" id="fbSend" class="btn btn-ghost">送出</button></div>
+            </div>
+            <p id="fbDone" style="display:none;color:var(--lake-deep);font-family:var(--serif);margin:12px 0 0;">收到了，謝謝你 🌱</p>
+          </div>
           <div class="stage-btns" style="margin-top:16px;"><a href="story1-listen.html" class="btn btn-primary">回故事開頭，再走一遍 →</a></div>
         </div>
       </div>
@@ -347,5 +366,34 @@ document.querySelectorAll('[data-next]').forEach(function(btn){btn.addEventListe
 document.getElementById('getCard').addEventListener('click',function(){var m=document.getElementById('finishMsg');m.style.display='block';this.style.display='none';var d=new Date();document.getElementById('cardDate').textContent=d.getFullYear()+'.'+('0'+(d.getMonth()+1)).slice(-2)+'.'+('0'+d.getDate()).slice(-2);try{m.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}confetti();});
 document.getElementById('rewardCard').addEventListener('click',function(){this.classList.toggle('flipped');});
 (function(){var sg=document.getElementById('cardSign');if(sg){['click','mousedown','touchstart','keydown','keyup'].forEach(function(ev){sg.addEventListener(ev,function(e){e.stopPropagation();});});}})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+(function(){
+  var cfg={apiKey:"AIzaSyACuMuPhnj0IJc61e0soT-kewkkkJpi48k",authDomain:"tzujun-5a91d.firebaseapp.com",databaseURL:"https://tzujun-5a91d-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"tzujun-5a91d",storageBucket:"tzujun-5a91d.firebasestorage.app",messagingSenderId:"844611200436",appId:"1:844611200436:web:83f0db492f6ccae0afbee1"};
+  try{ if(window.firebase&&!firebase.apps.length){firebase.initializeApp(cfg);} }catch(e){}
+  var lastKey=null;
+  function fbMood(story,mood){try{var ref=firebase.database().ref('lianyu_feedback').push({story:story,mood:mood,note:'',ts:Date.now()});lastKey=ref.key;}catch(e){}}
+  function fbNote(story,txt){try{if(lastKey){firebase.database().ref('lianyu_feedback/'+lastKey).update({note:txt});}else{firebase.database().ref('lianyu_feedback').push({story:story,mood:'',note:txt,ts:Date.now()});}}catch(e){}}
+  var box=document.getElementById('fbBox'); if(!box) return;
+  var story=box.getAttribute('data-story');
+  box.querySelectorAll('[data-mood]').forEach(function(b){
+    b.addEventListener('click',function(){
+      box.querySelectorAll('[data-mood]').forEach(function(x){x.classList.remove('on');});
+      this.classList.add('on');
+      fbMood(story,this.getAttribute('data-mood'));
+      document.getElementById('fbThanks').style.display='block';
+      document.getElementById('fbNoteWrap').style.display='block';
+    });
+  });
+  var sb=document.getElementById('fbSend');
+  if(sb){sb.addEventListener('click',function(){
+    var t=document.getElementById('fbNote').value.trim();
+    if(t){fbNote(story,t);}
+    document.getElementById('fbNoteWrap').style.display='none';
+    document.getElementById('fbDone').style.display='block';
+  });}
+})();
 </script>
 </body></html>
