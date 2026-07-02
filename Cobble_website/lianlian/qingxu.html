@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>漣心 · 情緒小劇場</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ width:100%; height:100%; overflow:hidden; position:fixed; inset:0; touch-action:none;
+    font-family:"Noto Serif TC",serif; background:#fff7ee; color:#5a4632; -webkit-user-select:none; user-select:none; overscroll-behavior:none; }
+  body{ display:flex; flex-direction:column; align-items:center; }
+
+  .corner{ position:fixed; top:max(12px, env(safe-area-inset-top)); z-index:30;
+    height:clamp(42px,6vmin,72px); border-radius:999px; border:none; cursor:pointer;
+    background:rgba(214,158,96,0.18); color:#a5702c; font-size:clamp(14px,2.3vmin,24px);
+    display:flex; align-items:center; justify-content:center; line-height:1.05; }
+  #infoBtn{ left:max(12px, env(safe-area-inset-left)); width:clamp(42px,6vmin,72px); }
+  #soundBtn{ right:max(12px, env(safe-area-inset-right)); width:clamp(42px,6vmin,72px); }
+  #homeBtn{ right:calc(max(12px, env(safe-area-inset-right)) + clamp(42px,6vmin,72px) + 8px);
+    padding:0 clamp(12px,1.8vmin,20px); gap:5px; font-size:clamp(13px,2.1vmin,22px); white-space:nowrap; }
+
+  header{ text-align:center; padding:max(14px,env(safe-area-inset-top)) 12px 0; flex:0 0 auto; }
+  h1{ font-size:clamp(20px,3.6vmin,40px); font-weight:500; color:#a5702c; }
+
+  #stage{ flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; padding:6px 16px; min-height:0; }
+  #faceWrap{ width:clamp(150px,34vmin,340px); height:clamp(150px,34vmin,340px); transition:transform .2s ease; }
+  #faceWrap.happy{ animation:bob .6s ease infinite; }
+  #faceWrap.cry{ animation:tremble .18s linear infinite; }
+  #faceWrap.fuss{ animation:shake .12s linear infinite; }
+  #faceWrap.stub{ transform:rotate(-6deg); }
+  #faceWrap.good{ animation:sway 2s ease-in-out infinite; }
+  @keyframes bob{ 50%{ transform:translateY(-10px);} }
+  @keyframes tremble{ 25%{transform:translate(-2px,1px);}75%{transform:translate(2px,-1px);} }
+  @keyframes shake{ 25%{transform:translate(-4px,0) rotate(-2deg);}75%{transform:translate(4px,0) rotate(2deg);} }
+  @keyframes sway{ 50%{ transform:rotate(4deg);} }
+
+  #scene{ font-size:clamp(17px,3vmin,30px); font-weight:700; color:#7a5a34; text-align:center; margin-top:clamp(8px,1.6vmin,18px); min-height:1.5em; max-width:22em; }
+  #tip{ font-size:clamp(14px,2.3vmin,25px); color:#6a7d5a; background:rgba(120,160,90,0.12); border-radius:16px;
+    padding:clamp(10px,1.6vmin,18px) clamp(16px,2.4vmin,28px); margin-top:clamp(8px,1.4vmin,16px); text-align:left; line-height:1.8; max-width:24em; min-height:2em; }
+  #tip b{ color:#4f7a3a; }
+
+  #btns{ flex:0 0 auto; display:flex; flex-wrap:wrap; gap:clamp(8px,1.4vmin,14px); justify-content:center;
+    padding:clamp(10px,2vmin,22px) 14px max(20px,env(safe-area-inset-bottom)); }
+  .emo{ border:none; border-radius:999px; cursor:pointer; font-family:inherit; font-weight:700; color:#fff;
+    font-size:clamp(17px,2.8vmin,30px); padding:clamp(12px,1.8vmin,22px) clamp(18px,2.6vmin,34px);
+    box-shadow:0 6px 0 rgba(0,0,0,0.10), 0 8px 16px rgba(0,0,0,0.12); transition:transform .08s ease, box-shadow .08s ease; }
+  .emo:active,.emo.on{ transform:translateY(4px); box-shadow:0 2px 0 rgba(0,0,0,0.10); }
+
+  .overlay{ position:fixed; inset:0; z-index:40; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:clamp(28px,4vmin,64px); color:#5a4632;
+    background:radial-gradient(circle at 50% 36%, rgba(255,255,255,0.94), rgba(250,235,215,0.97)); transition:opacity .5s ease; }
+  .overlay.hide{ opacity:0; pointer-events:none; }
+  .obtn.ghost{ margin-top:8px; padding:clamp(12px,1.8vmin,22px) clamp(34px,4vmin,60px); border-radius:999px; border:2px solid #d69e60;
+    background:transparent; color:#a5702c; font-family:inherit; font-size:clamp(16px,2.4vmin,30px); cursor:pointer; }
+  #parent .panel{ max-width:32em; text-align:left; background:rgba(255,255,255,0.94); border:1px solid rgba(214,158,96,0.3);
+    border-radius:22px; padding:clamp(26px,3vmin,40px) clamp(24px,3vmin,38px); }
+  #parent h2{ font-size:clamp(22px,3.4vmin,40px); font-weight:700; color:#a5702c; margin-bottom:8px; }
+  #parent p{ font-size:clamp(15.5px,2.4vmin,28px); line-height:1.9; color:#6a5540; margin-bottom:12px; }
+  #parent p b{ color:#a5702c; }
+</style>
+</head>
+<body>
+<script>
+window.onerror=function(msg,src,line){ try{ var d=document.getElementById('__err');
+  if(!d){ d=document.createElement('div'); d.id='__err';
+    d.style.cssText='position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#c0392b;color:#fff;font:14px/1.6 -apple-system,sans-serif;padding:12px;white-space:pre-wrap';
+    (document.body||document.documentElement).appendChild(d); }
+  d.textContent='\u26a0 \u7a0b\u5f0f\u932f\u8aa4\uff1a'+msg+'\u3000(\u884c '+line+')'; }catch(e){} return false; };
+</script>
+
+<button id="infoBtn" class="corner" aria-label="給爸媽">給爸媽</button>
+<button id="homeBtn" class="corner" aria-label="回大廳">🏠 大廳</button>
+<button id="soundBtn" class="corner" aria-label="聲音">🔊</button>
+
+<header><h1>情緒小劇場</h1></header>
+
+<div id="stage">
+  <div id="faceWrap"></div>
+  <div id="scene">點下面看看，四歲的心情長什麼樣子？</div>
+  <div id="tip">這是給大人的小工具：先懂孩子的情緒，再回應。也可以和孩子一起玩，問他「你現在是哪一個？」</div>
+</div>
+
+<div id="btns"></div>
+
+<div id="parent" class="overlay hide">
+  <div class="panel">
+    <h2>給爸媽的小紙條</h2>
+    <p>點一種情緒，就會看到四歲孩子<b>可能的表情、聲音</b>，還有一句<b>可以怎麼回應</b>。</p>
+    <p>用法一:陪伴前先看看，提醒自己「先接住情緒，再講道理」。</p>
+    <p>用法二:和孩子一起玩，問他<b>「你現在是哪一個表情?」</b>——幫他認識、說出自己的情緒。</p>
+    <p>沒有哪個情緒是「壞」的。哭、鬧、拗，都是他在長大。我們的功課是陪他一起認識它們。</p>
+    <button class="obtn ghost" id="parentClose">我知道了</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function head(){ return '<circle cx="100" cy="112" r="70" fill="#ffe1c4" stroke="#eab68f" stroke-width="3"/>'
+    +'<circle cx="30" cy="112" r="12" fill="#ffe1c4" stroke="#eab68f" stroke-width="3"/>'
+    +'<circle cx="170" cy="112" r="12" fill="#ffe1c4" stroke="#eab68f" stroke-width="3"/>'
+    +'<path d="M32 82 Q100 20 168 82 Q150 60 128 58 Q112 40 100 54 Q88 40 72 58 Q50 60 32 82 Z" fill="#6b4a3a"/>'; }
+  function blush(){ return '<ellipse cx="66" cy="128" rx="13" ry="8" fill="#f7a8aa" opacity=".7"/><ellipse cx="134" cy="128" rx="13" ry="8" fill="#f7a8aa" opacity=".7"/>'; }
+  function svg(inner){ return '<svg viewBox="0 0 200 210" width="100%" height="100%">'+head()+inner+'</svg>'; }
+
+  var EMO={
+    laugh:{ label:"笑", color:"#f2b03c", cls:"happy",
+      face: blush()
+        +'<path d="M64 104 Q76 90 88 104" stroke="#3a2a22" stroke-width="6" fill="none" stroke-linecap="round"/>'
+        +'<path d="M112 104 Q124 90 136 104" stroke="#3a2a22" stroke-width="6" fill="none" stroke-linecap="round"/>'
+        +'<path d="M68 138 Q100 178 132 138 Z" fill="#c94b4b"/><path d="M80 142 Q100 158 120 142 Z" fill="#fff"/>',
+      scene:"積木堆得好高好高，成功了！",
+      tip:"跟他<b>一起笑</b>，說出他的開心：「哇，你堆得好高，好厲害！」快樂被看見，會更快樂。",
+      sound:"laugh" },
+    cry:{ label:"哭", color:"#5aa0d0", cls:"cry",
+      face:'<path d="M64 96 Q76 104 88 100" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>'
+        +'<path d="M112 100 Q124 104 136 96" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>'
+        +'<ellipse cx="76" cy="118" rx="5" ry="7" fill="#3a2a22"/><ellipse cx="124" cy="118" rx="5" ry="7" fill="#3a2a22"/>'
+        +'<path d="M72 126 q-5 20 0 30 q5 -8 0 -30" fill="#8fd0ff"/><path d="M128 126 q5 20 0 30 q-5 -8 0 -30" fill="#8fd0ff"/>'
+        +'<ellipse cx="100" cy="150" rx="15" ry="13" fill="#9a4b4b"/>',
+      scene:"最愛的氣球，飛走了⋯⋯",
+      tip:"先<b>抱抱他</b>：「我知道，氣球飛走了，好難過。」先接住情緒，別急著講道理。",
+      sound:"cry" },
+    fuss:{ label:"鬧", color:"#e8743c", cls:"fuss",
+      face:'<path d="M62 96 L92 106" stroke="#3a2a22" stroke-width="6" stroke-linecap="round"/>'
+        +'<path d="M138 96 L108 106" stroke="#3a2a22" stroke-width="6" stroke-linecap="round"/>'
+        +'<ellipse cx="78" cy="116" rx="6" ry="7" fill="#3a2a22"/><ellipse cx="122" cy="116" rx="6" ry="7" fill="#3a2a22"/>'
+        +'<ellipse cx="100" cy="150" rx="18" ry="15" fill="#9a3b3b"/>'
+        +'<path d="M150 70 q14 -6 20 6" stroke="#e8743c" stroke-width="5" fill="none" stroke-linecap="round"/>'
+        +'<path d="M158 58 q10 -2 12 10" stroke="#e8743c" stroke-width="5" fill="none" stroke-linecap="round"/>',
+      scene:"不想離開公園，坐在地上大哭大叫！",
+      tip:"<b>蹲下來</b>到他的高度，穩穩陪著：「你好想再玩。」等他緩一點，再給選擇。",
+      sound:"fuss" },
+    stub:{ label:"拗", color:"#9a7fd0", cls:"stub",
+      face:'<path d="M64 100 Q76 96 88 100" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>'
+        +'<path d="M112 100 Q124 96 136 100" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>'
+        +'<ellipse cx="82" cy="110" rx="5" ry="6" fill="#3a2a22"/><ellipse cx="128" cy="110" rx="5" ry="6" fill="#3a2a22"/>'
+        +blush()
+        +'<path d="M84 140 Q100 132 116 140" stroke="#a5573a" stroke-width="6" fill="none" stroke-linecap="round"/>',
+      scene:"「我不要穿外套！」怎麼說都不要。",
+      tip:"給<b>兩個你都OK的選擇</b>：「紅色還是藍色外套？」把主導權還給他，拗就鬆了。",
+      sound:"stub" },
+    good:{ label:"乖巧", color:"#7bbf6a", cls:"good",
+      face: blush()
+        +'<path d="M64 106 Q76 100 88 106" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>'
+        +'<path d="M112 106 Q124 100 136 106" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>'
+        +'<path d="M80 140 Q100 156 120 140" stroke="#c07a5a" stroke-width="5" fill="none" stroke-linecap="round"/>',
+      scene:"自己把碗端到廚房，還說了謝謝。",
+      tip:"<b>具體</b>稱讚他做的事：「你自己端碗，還說謝謝，好棒！」比只說『好乖』更有力量。",
+      sound:"good" }
+  };
+  var ORDER=["cry","fuss","laugh","stub","good"];
+
+  var faceWrap=document.getElementById("faceWrap");
+  var scene=document.getElementById("scene"), tip=document.getElementById("tip");
+  faceWrap.innerHTML=svg('<path d="M64 106 Q76 100 88 106" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M112 106 Q124 100 136 106" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M84 140 Q100 150 116 140" stroke="#c07a5a" stroke-width="5" fill="none" stroke-linecap="round"/>');
+
+  // 音訊
+  var ac=null, muted=false;
+  function unlock(){ try{ if(!ac){ ac=new (window.AudioContext||window.webkitAudioContext)(); } if(ac.state==="suspended"){ ac.resume(); } }catch(e){} }
+  function beep(freq,start,dur,type,vol){ if(!ac) return; var t=ac.currentTime+start;
+    var o=ac.createOscillator(), g=ac.createGain(); o.type=type||"sine"; o.frequency.value=freq; o.connect(g); g.connect(ac.destination);
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(vol||0.18,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.start(t); o.stop(t+dur+0.05); }
+  function glide(f1,f2,start,dur,vol){ if(!ac) return; var t=ac.currentTime+start;
+    var o=ac.createOscillator(), g=ac.createGain(); o.type="sine"; o.connect(g); g.connect(ac.destination);
+    o.frequency.setValueAtTime(f1,t); o.frequency.linearRampToValueAtTime(f2,t+dur);
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.03); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.start(t); o.stop(t+dur+0.05); }
+  function playSound(kind){ if(muted) return; unlock(); if(!ac) return;
+    if(kind==="laugh"){ [0,0.16,0.32,0.48].forEach(function(s,i){ beep(560+i*60,s,0.14,"triangle",0.16); }); }
+    else if(kind==="cry"){ glide(620,380,0,0.7,0.16); glide(560,340,0.75,0.8,0.15); }
+    else if(kind==="fuss"){ [0,0.13,0.26,0.39,0.52].forEach(function(s){ beep(300,s,0.09,"square",0.14); }); }
+    else if(kind==="stub"){ beep(180,0,0.5,"sawtooth",0.12); }
+    else if(kind==="good"){ beep(660,0,0.4,"sine",0.16); beep(880,0.14,0.5,"sine",0.14); }
+  }
+
+  function playEmo(key,btn){
+    var e=EMO[key]; if(!e) return;
+    faceWrap.className=""; void faceWrap.offsetWidth; faceWrap.className=e.cls;
+    faceWrap.innerHTML=svg(e.face);
+    scene.textContent=e.scene; tip.innerHTML=e.tip;
+    playSound(e.sound);
+    var all=document.querySelectorAll(".emo"); for(var i=0;i<all.length;i++) all[i].classList.remove("on");
+    if(btn) btn.classList.add("on");
+  }
+
+  var btns=document.getElementById("btns");
+  ORDER.forEach(function(key){
+    var e=EMO[key];
+    var b=document.createElement("button"); b.className="emo"; b.style.background=e.color;
+    b.textContent=e.label;
+    b.addEventListener("pointerdown", function(ev){ ev.preventDefault(); unlock(); playEmo(key,b); });
+    btns.appendChild(b);
+  });
+
+  document.getElementById("infoBtn").addEventListener("click", function(){ document.getElementById("parent").classList.remove("hide"); });
+  document.getElementById("parentClose").addEventListener("click", function(){ document.getElementById("parent").classList.add("hide"); });
+  document.getElementById("homeBtn").addEventListener("click", function(){ location.href="index.html"; });
+  document.getElementById("soundBtn").addEventListener("click", function(){ muted=!muted; document.getElementById("soundBtn").textContent=muted?"🔈":"🔊"; });
+})();
+</script>
+</body>
+</html>

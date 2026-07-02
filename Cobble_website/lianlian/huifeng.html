@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>漣心 · 給爸媽的回饋</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ width:100%; min-height:100%; font-family:"Noto Serif TC",serif; background:#F7F3EA; color:#27486b;
+    -webkit-user-select:none; user-select:none; }
+  body{ display:flex; flex-direction:column; align-items:center; padding:max(70px,calc(env(safe-area-inset-top) + 64px)) 18px max(30px,env(safe-area-inset-bottom)); }
+
+  .corner{ position:fixed; top:max(12px, env(safe-area-inset-top)); z-index:30;
+    height:clamp(42px,6vmin,72px); border-radius:999px; border:none; cursor:pointer;
+    background:rgba(78,134,190,0.14); color:#3a6694; font-size:clamp(13px,2.1vmin,22px);
+    display:flex; align-items:center; justify-content:center; padding:0 clamp(12px,1.8vmin,20px); gap:5px; white-space:nowrap; }
+  #homeBtn{ left:max(12px, env(safe-area-inset-left)); }
+
+  .card{ width:100%; max-width:34em; background:#fff; border:1px solid rgba(78,134,190,0.16); border-radius:24px;
+    box-shadow:0 14px 34px rgba(78,134,190,0.12); padding:clamp(24px,4vmin,44px); }
+  .drop{ font-size:clamp(40px,9vmin,80px); text-align:center; }
+  h1{ text-align:center; font-size:clamp(22px,4vmin,40px); font-weight:500; color:#27486b; margin-bottom:4px; }
+  .lede{ text-align:center; font-size:clamp(14px,2.4vmin,24px); color:#5a7795; line-height:1.8; margin-bottom:clamp(18px,3vmin,30px); }
+  .q{ font-size:clamp(16px,2.6vmin,26px); font-weight:700; color:#2f4d6e; margin:clamp(16px,2.6vmin,26px) 0 clamp(8px,1.4vmin,14px); }
+
+  .stars{ display:flex; gap:clamp(4px,1vmin,10px); justify-content:center; }
+  .star{ font-size:clamp(34px,7vmin,64px); cursor:pointer; filter:grayscale(1) opacity(.4); transition:transform .1s ease, filter .1s ease; }
+  .star.on{ filter:none; transform:scale(1.08); }
+  .star:active{ transform:scale(1.2); }
+
+  .chips{ display:flex; flex-wrap:wrap; gap:clamp(8px,1.4vmin,12px); }
+  .chip{ padding:clamp(9px,1.4vmin,14px) clamp(16px,2.4vmin,26px); border-radius:999px; border:1.5px solid #9cc4ec; background:#fff;
+    color:#3a6694; font-family:inherit; font-size:clamp(15px,2.4vmin,24px); cursor:pointer; }
+  .chip.on{ background:#6FA8DC; color:#fff; border-color:#6FA8DC; }
+
+  textarea{ width:100%; min-height:5em; border:1.5px solid #c3dcf2; border-radius:14px; padding:clamp(12px,1.8vmin,18px);
+    font-family:inherit; font-size:clamp(15px,2.4vmin,24px); color:#27486b; outline:none; resize:vertical; }
+  textarea:focus{ border-color:#6FA8DC; }
+  input.name{ width:100%; border:1.5px solid #c3dcf2; border-radius:14px; padding:clamp(11px,1.6vmin,16px);
+    font-family:inherit; font-size:clamp(15px,2.4vmin,24px); color:#27486b; outline:none; }
+  input.name:focus{ border-color:#6FA8DC; }
+
+  .send{ width:100%; margin-top:clamp(20px,3vmin,32px); padding:clamp(15px,2.2vmin,26px); border:none; border-radius:999px; cursor:pointer;
+    font-family:inherit; font-size:clamp(19px,3.2vmin,38px); font-weight:700; color:#fff; background:#4E86BE; box-shadow:0 10px 26px rgba(78,134,190,0.4); }
+  .send:active{ transform:scale(0.98); }
+  .msg{ text-align:center; margin-top:14px; font-size:clamp(14px,2.2vmin,22px); min-height:1.4em; }
+  .msg.ok{ color:#36a06b; } .msg.err{ color:#c0392b; }
+
+  #thanks{ display:none; text-align:center; }
+  #thanks .big{ font-size:clamp(56px,13vmin,120px); }
+  #thanks .lead{ font-size:clamp(22px,4.4vmin,44px); font-weight:500; color:#27486b; margin:10px 0; }
+  #thanks .t{ font-size:clamp(15px,2.6vmin,26px); color:#5a7795; line-height:1.9; }
+  #thanks .again{ margin-top:24px; padding:clamp(12px,1.8vmin,22px) clamp(34px,4vmin,60px); border-radius:999px; border:2px solid #6FA8DC;
+    background:transparent; color:#3a6694; font-family:inherit; font-size:clamp(16px,2.4vmin,30px); cursor:pointer; }
+</style>
+</head>
+<body>
+<script>
+window.onerror=function(msg,src,line){ try{ var d=document.getElementById('__err');
+  if(!d){ d=document.createElement('div'); d.id='__err';
+    d.style.cssText='position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#c0392b;color:#fff;font:14px/1.6 -apple-system,sans-serif;padding:12px;white-space:pre-wrap';
+    (document.body||document.documentElement).appendChild(d); }
+  d.textContent='\u26a0 \u7a0b\u5f0f\u932f\u8aa4\uff1a'+msg+'\u3000(\u884c '+line+')'; }catch(e){} return false; };
+</script>
+
+<button id="homeBtn" class="corner" aria-label="回大廳">🏠 大廳</button>
+
+<div class="card" id="form">
+  <div class="drop">💧</div>
+  <h1>給爸媽的回饋</h1>
+  <div class="lede">孩子玩得怎麼樣？<br>您的觀察，會幫漣漣長得更好 🌿</div>
+
+  <div class="q">今天玩得開不開心？</div>
+  <div class="stars" id="stars">
+    <span class="star" data-v="1">⭐</span><span class="star" data-v="2">⭐</span><span class="star" data-v="3">⭐</span><span class="star" data-v="4">⭐</span><span class="star" data-v="5">⭐</span>
+  </div>
+
+  <div class="q">最愛哪一扇門？</div>
+  <div class="chips" id="chips">
+    <button class="chip" data-v="靜水">💧 靜水</button>
+    <button class="chip" data-v="動一動">🏃 動一動</button>
+    <button class="chip" data-v="聲音水池">🎵 聲音水池</button>
+    <button class="chip" data-v="鋼琴">🎹 鋼琴</button>
+    <button class="chip" data-v="情緒小劇場">🎭 情緒小劇場</button>
+  </div>
+
+  <div class="q">想跟我們說的話</div>
+  <textarea id="comment" placeholder="哪裡最愛、哪裡卡住、想要什麼新玩法…都可以寫"></textarea>
+
+  <div class="q">您是（可不填）</div>
+  <input class="name" id="who" type="text" placeholder="例如：漣漣的媽媽">
+
+  <button class="send" id="send">送出回饋 💛</button>
+  <div class="msg" id="msg">　</div>
+</div>
+
+<div class="card" id="thanks">
+  <div class="big">🌸</div>
+  <div class="lead">收到了，謝謝您！</div>
+  <div class="t">您的每一句話，都是漣漣往前的力量。<br>我們會照孩子的樣子，慢慢把小屋調得更好。</div>
+  <button class="again" id="againBtn">回大廳</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  // ⬇⬇ 把 Firebase 即時資料庫網址貼在這裡（例如 https://xxxx-default-rtdb.asia-southeast1.firebasedatabase.app）⬇⬇
+  var DB_URL = "https://tzujun-5a91d-default-rtdb.asia-southeast1.firebasedatabase.app";
+
+  var rating=0, favorite="";
+  var stars=document.getElementById("stars").getElementsByClassName("star");
+  function paintStars(){ for(var i=0;i<stars.length;i++){ stars[i].classList.toggle("on", (i < rating)); } }
+  for(var i=0;i<stars.length;i++){ (function(s){
+    s.addEventListener("click", function(){ rating=parseInt(s.getAttribute("data-v"),10); paintStars(); });
+  })(stars[i]); }
+
+  var chips=document.getElementById("chips").getElementsByClassName("chip");
+  for(var j=0;j<chips.length;j++){ (function(c){
+    c.addEventListener("click", function(){
+      for(var k=0;k<chips.length;k++) chips[k].classList.remove("on");
+      c.classList.add("on"); favorite=c.getAttribute("data-v");
+    });
+  })(chips[j]); }
+
+  var msg=document.getElementById("msg");
+  function setMsg(t,cls){ msg.textContent=t; msg.className="msg"+(cls?(" "+cls):""); }
+  function showThanks(){ document.getElementById("form").style.display="none"; document.getElementById("thanks").style.display="block"; window.scrollTo(0,0); }
+
+  document.getElementById("send").addEventListener("click", function(){
+    var comment=document.getElementById("comment").value.trim();
+    var who=document.getElementById("who").value.trim();
+    if(rating===0 && !comment){ setMsg("先點幾顆星星，或寫一句話喔 🌟","err"); return; }
+    var data={ 評分:rating, 最愛的門:favorite, 留言:comment, 家長:who, 時間:new Date().toLocaleString("zh-TW") };
+
+    // 尚未連上資料庫：先示範感謝畫面（提醒把 Firebase 網址給我）
+    if(DB_URL.indexOf("firebasedatabase.app")<0 && DB_URL.indexOf("firebaseio.com")<0){ showThanks(); return; }
+
+    setMsg("送出中…");
+    fetch(DB_URL.replace(/\/$/,"") + "/lianlian_feedback.json", { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify(data) })
+      .then(function(r){ if(r.ok){ showThanks(); } else { setMsg("送出失敗，請再試一次 🙏","err"); } })
+      .catch(function(){ setMsg("網路不太順，請再試一次 🙏","err"); });
+  });
+
+  document.getElementById("homeBtn").addEventListener("click", function(){ location.href="index.html"; });
+  document.getElementById("againBtn").addEventListener("click", function(){ location.href="index.html"; });
+})();
+</script>
+</body>
+</html>
